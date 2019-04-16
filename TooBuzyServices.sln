@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzyServices", "TooBuzyServices\TooBuzyServices.csproj", "{D4558AC3-3A46-4E27-B139-6744F4688DC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzyClient", "TooBuzyClient\TooBuzyClient.csproj", "{BD7D3233-0DED-4E3D-B7F4-7E8D09F4EBF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D4558AC3-3A46-4E27-B139-6744F4688DC2} = {D4558AC3-3A46-4E27-B139-6744F4688DC2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzyEntities", "TooBuzyEntities\TooBuzyEntities.csproj", "{CA542AB2-8967-4369-864F-9087F4237D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzyDataAccess", "TooBuzyDataAccess\TooBuzyDataAccess.csproj", "{E7799436-7E38-4A54-85B9-38129B0EB2A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzyBusinessLogic", "TooBuzyBusinessLogic\TooBuzyBusinessLogic.csproj", "{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooBuzySelfHost", "TooBuzySelfHost\TooBuzySelfHost.csproj", "{C8BA9492-40A6-479D-A301-978413A81CE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4558AC3-3A46-4E27-B139-6744F4688DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4558AC3-3A46-4E27-B139-6744F4688DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4558AC3-3A46-4E27-B139-6744F4688DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4558AC3-3A46-4E27-B139-6744F4688DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7D3233-0DED-4E3D-B7F4-7E8D09F4EBF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7D3233-0DED-4E3D-B7F4-7E8D09F4EBF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7D3233-0DED-4E3D-B7F4-7E8D09F4EBF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7D3233-0DED-4E3D-B7F4-7E8D09F4EBF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA542AB2-8967-4369-864F-9087F4237D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA542AB2-8967-4369-864F-9087F4237D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA542AB2-8967-4369-864F-9087F4237D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA542AB2-8967-4369-864F-9087F4237D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7799436-7E38-4A54-85B9-38129B0EB2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7799436-7E38-4A54-85B9-38129B0EB2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7799436-7E38-4A54-85B9-38129B0EB2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7799436-7E38-4A54-85B9-38129B0EB2A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8BA9492-40A6-479D-A301-978413A81CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8BA9492-40A6-479D-A301-978413A81CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8BA9492-40A6-479D-A301-978413A81CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BA9492-40A6-479D-A301-978413A81CE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
