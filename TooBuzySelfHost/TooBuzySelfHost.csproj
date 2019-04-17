@@ -52,6 +52,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TooBuzyServices\TooBuzyServices.csproj">
       <Project>{d4558ac3-3a46-4e27-b139-6744f4688dc2}</Project>
       <Name>TooBuzyServices</Name>

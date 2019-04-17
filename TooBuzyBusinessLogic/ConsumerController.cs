@@ -23,7 +23,7 @@ namespace TooBuzyBusinessLogic
 
         public void Delete(int Id)
         {
-            throw new NotImplementedException();
+            _ConsumerDb.Delete(Id);
         }
 
         public IEnumerable<Consumer> GetAll()

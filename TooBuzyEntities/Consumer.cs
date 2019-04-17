@@ -22,7 +22,8 @@ namespace TooBuzyEntities
         public int PhoneNo { get; set; }
         [DataMember]
         public List<Booking> Bookings { get; set; }
-
+        [DataMember]
+        public string Password { get; set; }
         public override string ToString()
         {
             return this.Name + "(" + PhoneNo + ")";

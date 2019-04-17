@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TooBuzyBusinessLogic;
 using TooBuzyEntities;
 
 namespace TooBuzyClient
@@ -30,70 +29,128 @@ namespace TooBuzyClient
 
         private void getAll_Click(object sender, RoutedEventArgs e)
         {
-            updateConsumerListBox();
-        }
-        public void updateConsumerListBox()
-        {
-           TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
-            var allConumsers = client.GetAll();
-            listBConsumers.Items.Clear();
-            foreach (Consumer consumer in allConumsers)
+            try
             {
-                listBConsumers.Items.Add(consumer);
+                updateConsumerListBox();
             }
-            
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+
+        }
+        public async void updateConsumerListBox()
+        {
+            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            try
+            {
+                var allConumsers = await client.GetAllAsync();
+                listBConsumers.Items.Clear();
+                foreach (Consumer consumer in allConumsers)
+                {
+                    listBConsumers.Items.Add(consumer);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                client.Close();
+            }
+
         }
 
         private void InsertConsumer_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
-            if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text))
+            try
             {
-                int ParsedPhoneNo = -1;
-                if (int.TryParse(txtPhoneNo.Text, out ParsedPhoneNo))
+                if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo };
+                    int ParsedPhoneNo = -1;
+                    if (int.TryParse(txtPhoneNo.Text, out ParsedPhoneNo))
+                    {
+                        Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = txtPassword.Text };
 
-                    client.CreateConsumer(newConsumer);
-                    updateConsumerListBox();
-                    MessageBox.Show("Name:" + newConsumer.Name + "& PhoneNumber:" + newConsumer.PhoneNo.ToString());
+                        client.CreateConsumer(newConsumer);
+                        updateConsumerListBox();
+                        MessageBox.Show("Name:" + newConsumer.Name + "& PhoneNumber:" + newConsumer.PhoneNo.ToString());
+                    }
+
                 }
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                client.Close();
             }
         }
 
         private void btnFindConsumer_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
-            if (!string.IsNullOrEmpty(txtPhoneNo_Copy.Text))
+            try
             {
-                int ParsedPhoneNo;
-                if (int.TryParse(txtPhoneNo_Copy.Text, out ParsedPhoneNo))
+                if (!string.IsNullOrEmpty(txtPhoneNo_Copy.Text))
                 {
-                    Consumer consumer = client.GetByInt(ParsedPhoneNo);
-                    MessageBox.Show("Name:" + consumer.Name + "   &     PhoneNumber:" + consumer.PhoneNo.ToString());
+                    int ParsedPhoneNo;
+                    if (int.TryParse(txtPhoneNo_Copy.Text, out ParsedPhoneNo))
+                    {
+                        Consumer consumer = client.GetByInt(ParsedPhoneNo);
+                        MessageBox.Show("Name:" + consumer.Name + "   &     PhoneNumber:" + consumer.PhoneNo.ToString());
+
+                    }
 
                 }
-
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                client.Close();
+            }
+
         }
 
         private void btnFindConsumerById_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
-            if (!string.IsNullOrEmpty(txtGetById.Text))
+            try
             {
-                int ParsedId;
-                if (int.TryParse(txtGetById.Text, out ParsedId))
+                if (!string.IsNullOrEmpty(txtGetById.Text))
                 {
-                    Consumer consumer = client.GetConsumerById(ParsedId);
+                    int ParsedId;
+                    if (int.TryParse(txtGetById.Text, out ParsedId))
+                    {
+                        Consumer consumer = client.GetConsumerById(ParsedId);
 
-                    MessageBox.Show(consumer.Name);
+                        MessageBox.Show(consumer.Name);
+                    }
+
                 }
-
             }
+            catch (Exception ex)
+            {
 
-
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                client.Close();
+            }
         }
     }
 }

@@ -120,15 +120,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TooBuzyBusinessLogic\TooBuzyBusinessLogic.csproj">
-      <Project>{3A767D01-D05D-4E54-BE2F-3E7D8FAD714F}</Project>
+      <Project>{3a767d01-d05d-4e54-be2f-3e7d8fad714f}</Project>
       <Name>TooBuzyBusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TooBuzyDataAccess\TooBuzyDataAccess.csproj">
-      <Project>{e7799436-7e38-4a54-85b9-38129b0eb2a5}</Project>
-      <Name>TooBuzyDataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TooBuzyEntities\TooBuzyEntities.csproj">
-      <Project>{CA542AB2-8967-4369-864F-9087F4237D33}</Project>
+      <Project>{ca542ab2-8967-4369-864f-9087f4237d33}</Project>
       <Name>TooBuzyEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\TooBuzyServices\TooBuzyServices.csproj">
