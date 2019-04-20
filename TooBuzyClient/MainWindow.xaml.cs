@@ -67,7 +67,7 @@ namespace TooBuzyClient
 
         private void InsertConsumer_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
             {
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
@@ -98,7 +98,7 @@ namespace TooBuzyClient
 
         private void btnFindConsumer_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
             {
                 if (!string.IsNullOrEmpty(txtPhoneNo_Copy.Text))
@@ -127,7 +127,7 @@ namespace TooBuzyClient
 
         private void btnFindConsumerById_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
             {
                 if (!string.IsNullOrEmpty(txtGetById.Text))
@@ -151,6 +151,36 @@ namespace TooBuzyClient
             {
                 client.Close();
             }
+        }
+
+        private void btnConsumerUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtNameUpdate.Text) && !string.IsNullOrEmpty(txtPhoneNoUpdate.Text) && !string.IsNullOrEmpty(txtPasswordUpdate.Text))
+                {
+                    int ParsedId;
+                    int PhoneNoUpdate;
+                    if (int.TryParse(txtIdUpdate.Text, out ParsedId) && int.TryParse(txtPhoneNoUpdate.Text, out PhoneNoUpdate))
+                    {
+                        Consumer UpdateConsumer = new Consumer { Id = ParsedId, Name = txtNameUpdate.Text, PhoneNo = PhoneNoUpdate, Password = txtPasswordUpdate.Text };
+                        client.UpdateConsumer(UpdateConsumer);
+                        updateConsumerListBox();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                client.Close();
+            }
+
         }
     }
 }

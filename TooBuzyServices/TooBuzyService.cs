@@ -8,6 +8,7 @@ using TooBuzyServices;
 using TooBuzyDataAccess;
 using TooBuzyBusinessLogic;
 using System.ServiceModel;
+using System.Threading;
 
 namespace TooBuzyServices
 {
@@ -29,6 +30,7 @@ namespace TooBuzyServices
         [OperationBehavior]
         public IEnumerable<Consumer> GetAll()
         {
+            var principal = Thread.CurrentPrincipal;
             IEnumerable<Consumer> foundConsumers = ConsCtr.GetAll();
             return foundConsumers;
         }
@@ -43,9 +45,11 @@ namespace TooBuzyServices
             return ConsCtr.GetById(Id);
         }
         [OperationBehavior]
-        public void UpdateConsumer(int Id)
+        public void UpdateConsumer(Consumer consumer)
         {
-            throw new NotImplementedException();
+            ConsCtr.Update(consumer);
         }
+
+
     }
 }

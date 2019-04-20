@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -18,7 +18,7 @@ namespace TooBuzyServices
         [OperationContract]
         IEnumerable<Consumer> GetAll();
         [OperationContract]
-        void UpdateConsumer(int Id);
+        void UpdateConsumer(Consumer consumer);
         [OperationContract]
         void DeleteConsumer(int Id);
         [OperationContract]

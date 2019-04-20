@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TooBuzyClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="552.684" Width="693.079">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="153*"/>
             <RowDefinition Height="166*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="InsertConsumer" Content="Create Consumer" HorizontalAlignment="Left" Margin="60,3.056,0,0" VerticalAlignment="Top" Width="99"  Click="InsertConsumer_Click" Height="24" Grid.Row="1"/>
-        <Button x:Name="getAll" Content="getAll&#xD;&#xA;" HorizontalAlignment="Left" Margin="380,42.056,0,0" VerticalAlignment="Top" Width="91" Click="getAll_Click" Height="24" Grid.Row="1"/>
+        <Button x:Name="InsertConsumer" Content="Create Consumer" HorizontalAlignment="Left" Margin="60,177,0,0" VerticalAlignment="Top" Width="99"  Click="InsertConsumer_Click" Height="24"/>
+        <Button x:Name="getAll" Content="getAll&#xD;&#xA;" HorizontalAlignment="Left" Margin="371,195,0,0" VerticalAlignment="Top" Width="91" Click="getAll_Click" Height="24"/>
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="49,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtPhoneNo" HorizontalAlignment="Left" Height="23" Margin="49,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="49,4,0,0" VerticalAlignment="Top"/>
@@ -22,11 +22,19 @@
         <TextBox x:Name="txtPhoneNo_Copy" HorizontalAlignment="Left" Height="23" Margin="217,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblPhoneNo_Copy" Content="Phone Number" HorizontalAlignment="Left" Margin="217,57,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnFindConsumer" Content="Find Consumer&#xA;by PhoneNo" HorizontalAlignment="Left" Margin="217,126,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumer_Click" Height="37" Grid.RowSpan="2"/>
-        <TextBox x:Name="txtGetById" HorizontalAlignment="Left" Height="23" Margin="49,58.056,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <Label x:Name="lblGetById" Content="Find Consumer by Id" HorizontalAlignment="Left" Margin="49,32.056,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button x:Name="btnFindConsumerById" Content="Find Consumer&#xA;by Id" HorizontalAlignment="Left" Margin="49,86.056,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumerById_Click" Height="37" Grid.Row="1"/>
+        <TextBox x:Name="txtGetById" HorizontalAlignment="Left" Height="23" Margin="49,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="lblGetById" Content="Find Consumer by Id" HorizontalAlignment="Left" Margin="49,249,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Button x:Name="btnFindConsumerById" Content="Find Consumer&#xA;by Id" HorizontalAlignment="Left" Margin="49,53,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumerById_Click" Height="37" Grid.Row="1"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="49,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblPasssword" Content="Password:" HorizontalAlignment="Left" Margin="49,102,0,0" VerticalAlignment="Top"/>
-
+        <TextBox x:Name="txtNameUpdate" HorizontalAlignment="Left" Height="23" Margin="371,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox x:Name="txtPhoneNoUpdate" HorizontalAlignment="Left" Height="23" Margin="371,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="lblName_Copy" Content="Name:" HorizontalAlignment="Left" Margin="371,49,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label x:Name="lblPhoneNo_Copy1" Content="Phone Number: " HorizontalAlignment="Left" Margin="371,98,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox x:Name="txtPasswordUpdate" HorizontalAlignment="Left" Height="23" Margin="371,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="lblPasssword_Copy" Content="Password:" HorizontalAlignment="Left" Margin="371,147,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox x:Name="txtIdUpdate" HorizontalAlignment="Left" Height="23" Margin="371,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="lblIdUpdate" Content="Update Consumer by id" HorizontalAlignment="Left" Margin="371,0,0,0" VerticalAlignment="Top" Grid.Row="1" Width="136"/>
+        <Button x:Name="btnConsumerUpdate" Content="Update Consumer" HorizontalAlignment="Left" Margin="371,214,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="btnConsumerUpdate_Click"/>
     </Grid>
 </Window>

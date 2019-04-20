@@ -5,6 +5,7 @@
       <xs:element minOccurs="0" name="Bookings" nillable="true" type="tns:ArrayOfBooking" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNo" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

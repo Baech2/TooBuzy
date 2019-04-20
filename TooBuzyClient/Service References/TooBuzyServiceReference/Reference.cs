@@ -34,10 +34,10 @@ namespace TooBuzyClient.TooBuzyServiceReference {
         System.Threading.Tasks.Task<TooBuzyEntities.Consumer[]> GetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateConsumerResponse")]
-        void UpdateConsumer(int Id);
+        void UpdateConsumer(TooBuzyEntities.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateConsumerResponse")]
-        System.Threading.Tasks.Task UpdateConsumerAsync(int Id);
+        System.Threading.Tasks.Task UpdateConsumerAsync(TooBuzyEntities.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteConsumerResponse")]
         void DeleteConsumer(int Id);
@@ -103,12 +103,12 @@ namespace TooBuzyClient.TooBuzyServiceReference {
             return base.Channel.GetAllAsync();
         }
         
-        public void UpdateConsumer(int Id) {
-            base.Channel.UpdateConsumer(Id);
+        public void UpdateConsumer(TooBuzyEntities.Consumer consumer) {
+            base.Channel.UpdateConsumer(consumer);
         }
         
-        public System.Threading.Tasks.Task UpdateConsumerAsync(int Id) {
-            return base.Channel.UpdateConsumerAsync(Id);
+        public System.Threading.Tasks.Task UpdateConsumerAsync(TooBuzyEntities.Consumer consumer) {
+            return base.Channel.UpdateConsumerAsync(consumer);
         }
         
         public void DeleteConsumer(int Id) {

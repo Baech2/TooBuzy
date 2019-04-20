@@ -42,7 +42,7 @@
   <xs:element name="UpdateConsumer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Id" type="xs:int" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TooBuzyEntities" minOccurs="0" name="consumer" nillable="true" type="q4:Consumer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -73,7 +73,7 @@
   <xs:element name="GetByIntResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/TooBuzyEntities" minOccurs="0" name="GetByIntResult" nillable="true" type="q4:Consumer" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/TooBuzyEntities" minOccurs="0" name="GetByIntResult" nillable="true" type="q5:Consumer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -41,10 +41,12 @@ namespace TooBuzyBusinessLogic
             return _ConsumerDb.GetByInt(phone);
         }
 
-
-        public void Update(int Id)
+        public void Update(Consumer entity)
         {
-            throw new NotImplementedException();
+            if (entity != null)
+            {
+                _ConsumerDb.Update(entity);
+            }
         }
     }
 }

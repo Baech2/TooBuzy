@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsumerDb.cs" />
+    <Compile Include="CustomerDb.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
     <Compile Include="OrderDb.cs" />
     <Compile Include="ProductDb.cs" />

@@ -9,7 +9,7 @@ namespace TooBuzyBusinessLogic.Interfaces
     interface ICRUD<T>
     {
         void Create(T entity);
-        void Update(int Id);
+        void Update(T entity);
         void Delete(int Id);
         T GetById(int Id);
         IEnumerable<T> GetAll();

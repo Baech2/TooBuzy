@@ -52,13 +52,13 @@ namespace TooBuzyDataAccess
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-
-                    string query = "DELETE FROM [Order] WHERE Id=@Id";
+                    string query = "DELETE FROM Consumer WHERE Id=@Id";
                     using (SqlCommand cmd = new SqlCommand(query))
                     {
                         cmd.Parameters.AddWithValue("@Id", Id);
                         cmd.Connection = connection;
                         connection.Open();
+
                         Console.WriteLine("----------------");
                         Console.WriteLine("Deleting Consumer by inserted id" + Id);
 
@@ -99,6 +99,7 @@ namespace TooBuzyDataAccess
                             cons.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
                             consumers.Add(cons);
                         }
+                        connection.Close();
                     }
                     Console.WriteLine("Returning all Consumers");
                     Console.WriteLine("----------------");
@@ -125,7 +126,7 @@ namespace TooBuzyDataAccess
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
                         cmd.CommandText = "SELECT Id, Name, PhoneNo FROM Consumer WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("@Id", Id);
+                        cmd.Parameters.AddWithValue("Id", Id);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -134,7 +135,7 @@ namespace TooBuzyDataAccess
                             consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
                         }
                     }
-
+                    connection.Close();
                     Console.WriteLine("Returning the Consumer with id: " + Id);
                     Console.WriteLine("----------------");
 
@@ -169,6 +170,7 @@ namespace TooBuzyDataAccess
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
+                            consumer.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
                             consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
                         }
@@ -186,9 +188,33 @@ namespace TooBuzyDataAccess
             return consumer;
         }
 
-        public void Update(int Id)
+        public void Update(Consumer entity)
         {
-            throw new NotImplementedException();
+            TransactionOptions options = new TransactionOptions();
+            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("----------------");
+                    Console.WriteLine("Updatting consumer:" + entity.Name);
+
+                    using (SqlCommand cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = "UPDATE Consumer SET Name = @Name, PhoneNo = @PhoneNo, Password = @Password WHERE Id = @Id";
+                        cmd.Parameters.AddWithValue("Id", entity.Id);
+                        cmd.Parameters.AddWithValue("Name", entity.Name);
+                        cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                        cmd.Parameters.AddWithValue("Password", entity.Password);
+                        cmd.ExecuteNonQuery();
+                    }
+                    Console.WriteLine("consumer updated");
+                    Console.WriteLine("----------------");
+                    connection.Close();
+                }
+                scope.Complete();
+            }
         }
     }
 }
