@@ -29,12 +29,13 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, MenuId) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @MenuId)";
+                        cmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Password, MenuId) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Password, @MenuId)";
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Type", entity.Type);
                         cmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
                         cmd.Parameters.AddWithValue("Address", entity.Address);
                         cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                        cmd.Parameters.AddWithValue("Password", entity.Password);
                         cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
                     }
                     Console.WriteLine("Customer created");
@@ -204,13 +205,14 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Customer SET Name = @Name, Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, MenuId = @MenuId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE Customer SET Name = @Name, Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password, MenuId = @MenuId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Type", entity.Type);
                         cmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
                         cmd.Parameters.AddWithValue("Address", entity.Address);
                         cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                        cmd.Parameters.AddWithValue("Password", entity.Password);
                         cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
                         cmd.ExecuteNonQuery();
                     }
