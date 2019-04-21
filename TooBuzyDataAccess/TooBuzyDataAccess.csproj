@@ -42,12 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingDb.cs" />
     <Compile Include="ConsumerDb.cs" />
     <Compile Include="CustomerDb.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="MenuDb.cs" />
     <Compile Include="OrderDb.cs" />
+    <Compile Include="OrderLineDb.cs" />
     <Compile Include="ProductDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TooBuzyEntities\TooBuzyEntities.csproj">

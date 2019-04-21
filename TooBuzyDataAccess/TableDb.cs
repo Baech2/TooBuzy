@@ -9,14 +9,13 @@ using System.Transactions;
 using TooBuzyDataAccess.Interfaces;
 using TooBuzyEntities;
 
-
 namespace TooBuzyDataAccess
 {
-    public class ConsumerDb : ICRUD<Consumer>
+    public class TableDb : ICRUD<Table>
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Consumer entity)
+        public void Create(Table entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -26,18 +25,21 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Creating consumer:" + entity.Name + " " + entity.PhoneNo);
+                    Console.WriteLine("Creating Table:" + entity.BookingId + " " + entity.CustomerId + " " + entity.TableNo);
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Consumer (Name, PhoneNo, Password) VALUES (@Name, @PhoneNo, @Password)";
-                        cmd.Parameters.AddWithValue("Name", entity.Name);
-                        cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
-                        cmd.Parameters.AddWithValue("Password", entity.Password);
+                        cmd.CommandText = "INSERT INTO Table (TableNo, NoOfSeats, BookingId, CustomerId) VALUES (@TableNo, @NoOfSeats, @BookingId, @CustomerId)";
+                        cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
+                        cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
+                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
+                        cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                         cmd.ExecuteNonQuery();
                     }
-                    Console.WriteLine("Consumer created");
+                    Console.WriteLine("Table created");
                     Console.WriteLine("----------------");
+
+                    connection.Close();
                 }
                 scope.Complete();
             }
@@ -57,21 +59,22 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "DELETE FROM Consumer WHERE Id = @Id";
+                        cmd.CommandText = "DELETE FROM Table WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Id", Id);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();
-                    Console.WriteLine("Consumer deleted!" + Id);
+                    Console.WriteLine("Table deleted!" + Id);
                     Console.WriteLine("----------------");
+
                 }
                 scope.Complete();
             }
         }
 
-        public IEnumerable<Consumer> GetAll()
+        public IEnumerable<Table> GetAll()
         {
-            List<Consumer> consumers = new List<Consumer>();
+            List<Table> tables = new List<Table>();
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
@@ -80,34 +83,35 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Getting all Consumer");
+                    Console.WriteLine("Getting all Tables");
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, PhoneNo FROM Consumer";
+                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM Consumer";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Consumer cons = new Consumer();
-                            cons.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                            cons.Name = reader.GetString(reader.GetOrdinal("Name"));
-                            cons.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
-                            consumers.Add(cons);
+                            Table table = new Table();
+                            table.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            table.TableNo = reader.GetInt32(reader.GetOrdinal("TableNo"));
+                            table.NoOfSeats = reader.GetInt32(reader.GetOrdinal("NoOfSeats"));
+                            table.BookingId = reader.GetInt32(reader.GetOrdinal("BookingId"));
+                            table.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
+                            tables.Add(table);
                         }
                     }
-                    connection.Close();
-                    Console.WriteLine("Returning all Consumers");
+                    Console.WriteLine("Returning all Tables");
                     Console.WriteLine("----------------");
-
+                    connection.Close();
                 }
                 scope.Complete();
             }
-            return consumers;
+            return tables;
         }
 
-        public Consumer GetById(int Id)
+        public Table GetById(int Id)
         {
-            Consumer consumer = new Consumer();
+            Table table = new Table();
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
@@ -116,65 +120,35 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Getting Consumer by inserted id: " + Id);
+                    Console.WriteLine("Getting all Tables");
+
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, PhoneNo FROM Consumer WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("Id", Id);
+                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM Consumer";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            consumer.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                            consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
-                            consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            table.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            table.TableNo = reader.GetInt32(reader.GetOrdinal("TableNo"));
+                            table.NoOfSeats = reader.GetInt32(reader.GetOrdinal("NoOfSeats"));
+                            table.BookingId = reader.GetInt32(reader.GetOrdinal("BookingId"));
+                            table.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                         }
                     }
                     connection.Close();
-                    Console.WriteLine("Returning the Consumer with id: " + Id);
+                    Console.WriteLine("Returning all Tables");
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();
             }
-            return consumer;
+            return table;
         }
-
-
-        public Consumer GetByInt(int phone)
+        public Table GetByInt(int phone)
         {
-            Consumer consumer = new Consumer();
-            TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
-            {
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    Console.WriteLine("----------------");
-                    Console.WriteLine("Getting Consumer by inserted phone number:" + phone);
-
-                    using (SqlCommand cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandText = "SELECT Id, Name, PhoneNo FROM Consumer where PhoneNo = @PhoneNo";
-                        cmd.Parameters.AddWithValue("PhoneNo", phone);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            consumer.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                            consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
-                            consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
-                        }
-                    }
-                    connection.Close();
-                    Console.WriteLine("Returning Consumer by inserted phone number: " + phone);
-                    Console.WriteLine("----------------");
-                }
-                scope.Complete();
-            }
-            return consumer;
+            throw new NotImplementedException();
         }
 
-        public void Update(Consumer entity)
+        public void Update(Table entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -184,19 +158,18 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Updatting consumer:" + entity.Name);
+                    Console.WriteLine("Updatting Table:" + entity.TableNo + entity.BookingId);
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Consumer SET Name = @Name, PhoneNo = @PhoneNo, Password = @Password WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("Id", entity.Id);
-                        cmd.Parameters.AddWithValue("Name", entity.Name);
-                        cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
-                        cmd.Parameters.AddWithValue("Password", entity.Password);
-                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "UPDATE Table SET TableNo = @TableNo, NoOfSeats = @NoOfSeats, BookingId = @BookingId, CustomerId = @CustomerId WHERE Id = @Id";
+                        cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
+                        cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
+                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
+                        cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                     }
                     connection.Close();
-                    Console.WriteLine("consumer updated");
+                    Console.WriteLine("Table updated");
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();

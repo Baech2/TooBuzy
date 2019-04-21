@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingController.cs" />
     <Compile Include="ConsumerController.cs" />
+    <Compile Include="CustomerContoller.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="MenuController.cs" />
+    <Compile Include="OrderController.cs" />
+    <Compile Include="OrderLineController.cs" />
+    <Compile Include="ProductController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TooBuzyDataAccess\TooBuzyDataAccess.csproj">

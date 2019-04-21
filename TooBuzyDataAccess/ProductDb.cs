@@ -88,7 +88,7 @@ namespace TooBuzyDataAccess
                         while (reader.Read())
                         {
                             Product product = new Product();
-                            product.Id = reader.GetInt32(reader.GetOrdinal("id"));
+                            product.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             product.ProductName = reader.GetString(reader.GetOrdinal("ProductName"));
                             product.Desciption = reader.GetString(reader.GetOrdinal("Description"));
                             product.Price = reader.GetDecimal(reader.GetOrdinal("Price"));
