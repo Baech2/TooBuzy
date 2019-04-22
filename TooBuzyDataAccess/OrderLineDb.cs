@@ -29,10 +29,11 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO OrderLine (Quantity, SubTotal, OrderId) VALUES (@Quantity, @SubTotal, @OrderId)";
+                        cmd.CommandText = "INSERT INTO OrderLine (Quantity, SubTotal, OrderId, ProductId) VALUES (@Quantity, @SubTotal, @OrderId, @ProductId)";
                         cmd.Parameters.AddWithValue("Quantity", entity.Quantity);
                         cmd.Parameters.AddWithValue("SubTotal", entity.SubTotal);
                         cmd.Parameters.AddWithValue("OrderId", entity.OrderId);
+                        cmd.Parameters.AddWithValue("ProductId", entity.ProductId);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();
@@ -83,7 +84,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId FROM OrderLine";
+                        cmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId,ProductId FROM OrderLine";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -92,6 +93,7 @@ namespace TooBuzyDataAccess
                             orderline.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity"));
                             orderline.SubTotal = reader.GetDecimal(reader.GetOrdinal("SubTotal"));
                             orderline.OrderId = reader.GetInt32(reader.GetOrdinal("OrderId"));
+                            orderline.ProductId = reader.GetInt32(reader.GetOrdinal("ProductId"));
                             orderlines.Add(orderline);
                         }
                     }
@@ -120,7 +122,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId FROM OrderLine";
+                        cmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId, ProductId FROM OrderLine";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -128,6 +130,7 @@ namespace TooBuzyDataAccess
                             orderline.Quantity = reader.GetInt32(reader.GetOrdinal("Quantity"));
                             orderline.SubTotal = reader.GetDecimal(reader.GetOrdinal("SubTotal"));
                             orderline.OrderId = reader.GetInt32(reader.GetOrdinal("OrderId"));
+                            orderline.ProductId = reader.GetInt32(reader.GetOrdinal("ProductId"));
                         }
                     }
                     connection.Close();
@@ -159,11 +162,12 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE OrderLine SET Quantity = @Quantity, SubTotal = @SubTotal, OrderId = @OrderId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE OrderLine SET Quantity = @Quantity, SubTotal = @SubTotal, OrderId = @OrderId, ProductId = @ProductId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Quantity", entity.Quantity);
                         cmd.Parameters.AddWithValue("SubTotal", entity.SubTotal);
                         cmd.Parameters.AddWithValue("OrderId", entity.OrderId);
+                        cmd.Parameters.AddWithValue("ProductId", entity.ProductId);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();

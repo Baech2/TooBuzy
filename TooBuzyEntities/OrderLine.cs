@@ -10,10 +10,6 @@ namespace TooBuzyEntities
     [DataContract]
     public class OrderLine
     {
-        public OrderLine()
-        {
-            Products = new List<Product>();
-        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -25,6 +21,8 @@ namespace TooBuzyEntities
         [DataMember]
         public Order Order { get; set; }
         [DataMember]
-        public List<Product> Products { get; set; } 
+        public Product Product { get; set; }
+        [DataMember]
+        public int ProductId { get; set; }
     }
 }

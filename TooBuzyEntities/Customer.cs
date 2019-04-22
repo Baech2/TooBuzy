@@ -29,10 +29,6 @@ namespace TooBuzyEntities
         [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public int MenuId { get; set; }
-        [DataMember]
-        public Menu Menu { get; set; }
-        [DataMember]
         public List<Table> Tables { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace TooBuzyEntities
         [DataMember]
         public Booking Booking { get; set; }
         [DataMember]
-        public int BookingId { get; set; }
+        public int? BookingId { get; set; }
         [DataMember]
         public Customer Customer { get; set; }
         [DataMember]

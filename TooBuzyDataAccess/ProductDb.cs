@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using System.Transactions;
 using System.Data.SqlClient;
-using TooBuzyEntities;
+using System.Transactions;
 using TooBuzyDataAccess.Interfaces;
+using TooBuzyEntities;
 
 namespace TooBuzyDataAccess
 {
@@ -29,14 +26,14 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Product (ProductName, Desciption, Price, ImageUrl, IsDeleted, MenuId, OrderLineId) VALUES (@ProductName, @Desciption, @Price, @ImageUrl, @IsDeleted, @MenuId, @OrderLineId)";
+                        cmd.CommandText = "INSERT INTO Product (ProductName, Desciption, Price, ImageUrl, IsDeleted, Stock, MenuId) VALUES (@ProductName, @Desciption, @Price, @ImageUrl, @IsDeleted, @MenuId)";
                         cmd.Parameters.AddWithValue("ProductName", entity.ProductName);
                         cmd.Parameters.AddWithValue("Desciption", entity.Desciption);
                         cmd.Parameters.AddWithValue("Price", entity.Price);
                         cmd.Parameters.AddWithValue("ImageUrl", entity.ImageUrl);
                         cmd.Parameters.AddWithValue("IsDeleted", entity.IsDeleted);
+                        cmd.Parameters.AddWithValue("Stock", entity.Stock);
                         cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
-                        cmd.Parameters.AddWithValue("OrderLineId", entity.OrderLineId);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();
@@ -83,7 +80,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, ProductName, Desciption, Price, ImageUrl, IsDeleted, MenuId, OrderLineId FROM Product";
+                        cmd.CommandText = "SELECT Id, ProductName, Desciption, Price, ImageUrl, IsDeleted, Stock, MenuId FROM Product";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -94,8 +91,8 @@ namespace TooBuzyDataAccess
                             product.Price = reader.GetDecimal(reader.GetOrdinal("Price"));
                             product.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                             product.IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"));
+                            product.Stock = reader.GetInt32(reader.GetOrdinal("Stock"));
                             product.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
-                            product.OrderLineId = reader.GetInt32(reader.GetOrdinal("OrderLineId"));
                             products.Add(product);
                         }
                     }
@@ -120,7 +117,7 @@ namespace TooBuzyDataAccess
                     Console.WriteLine("Getting Products by inserted id: " + Id);
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, ProductName, Desciption, Price, ImageUrl, IsDeleted, MenuId, OrderLineId FROM Product WHERE Id = @Id";
+                        cmd.CommandText = "SELECT Id, ProductName, Desciption, Price, ImageUrl, IsDeleted, MenuId FROM Product WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Id", Id);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -131,8 +128,8 @@ namespace TooBuzyDataAccess
                             product.Price = reader.GetDecimal(reader.GetOrdinal("Price"));
                             product.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
                             product.IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"));
+                            product.Stock = reader.GetInt32(reader.GetOrdinal("Stock"));
                             product.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
-                            product.OrderLineId = reader.GetInt32(reader.GetOrdinal("OrderLineId"));
                         }
                     }
                     connection.Close();
@@ -161,15 +158,15 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Consumer SET ProductName = @ProductName, Desciption = @Desciption, Price = @Price, ImageUrl = @ImageUrl, IsDeleted = @IsDeleted, MenuId = @MenuId, OrderLineId = @OrderLineId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE Consumer SET ProductName = @ProductName, Desciption = @Desciption, Price = @Price, ImageUrl = @ImageUrl, IsDeleted = @IsDeleted, Stock = @Stock, MenuId = @MenuId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("ProductName", entity.ProductName);
                         cmd.Parameters.AddWithValue("Desciption", entity.Desciption);
                         cmd.Parameters.AddWithValue("Price", entity.Price);
                         cmd.Parameters.AddWithValue("ImageUrl", entity.ImageUrl);
                         cmd.Parameters.AddWithValue("IsDeleted", entity.IsDeleted);
+                        cmd.Parameters.AddWithValue("Stock", entity.Stock);
                         cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
-                        cmd.Parameters.AddWithValue("OrderLineId", entity.OrderLineId);
                         cmd.ExecuteNonQuery();
                     }
                     Console.WriteLine("Product updated");

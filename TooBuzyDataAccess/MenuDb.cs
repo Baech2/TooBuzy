@@ -29,7 +29,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Menu (Category, Description) VALUES (@Category, @Description)";
+                        cmd.CommandText = "INSERT INTO Menu (Category, Description, CustomerId) VALUES (@Category, @Description, @CustomerId)";
                         cmd.Parameters.AddWithValue("Category", entity.Category);
                         cmd.Parameters.AddWithValue("Desciption", entity.Description);
                         cmd.ExecuteNonQuery();
@@ -84,7 +84,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
+                        cmd.CommandText = "SELECT Id, Category, Description, CustomerId FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -92,6 +92,7 @@ namespace TooBuzyDataAccess
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
+                            menu.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                             menus.Add(menu);
                         }
                     }
@@ -121,13 +122,14 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
+                        cmd.CommandText = "SELECT Id, Category, Description, CustomerId FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
+                            menu.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                         }
                     }
                     Console.WriteLine("Returning Menu by inserted Id:" + Id);
@@ -163,6 +165,7 @@ namespace TooBuzyDataAccess
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Category", entity.Category);
                         cmd.Parameters.AddWithValue("Description", entity.Description);
+                        cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                     }
                     Console.WriteLine("Menu updated");
                     Console.WriteLine("----------------");

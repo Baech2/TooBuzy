@@ -13,7 +13,7 @@ namespace TooBuzyEntities
         public Menu()
         {
             Products = new List<Product>();
-            Customers = new List<Customer>();
+            
         }
         [DataMember]
         public int Id { get; set; }
@@ -22,7 +22,9 @@ namespace TooBuzyEntities
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public List<Customer> Customers { get; set; }
+        public Customer Customer { get; set; }
+        [DataMember]
+        public int? CustomerId { get; set; }
         [DataMember]
         public List<Product> Products { get; set; }
     }
