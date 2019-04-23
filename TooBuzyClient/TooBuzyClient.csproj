@@ -57,11 +57,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\test\Controls\SimpleForm.xaml.cs">
+      <DependentUpon>SimpleForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\test\Panels\LayoutWidthRowsAndColumns.xaml.cs">
+      <DependentUpon>LayoutWidthRowsAndColumns.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\test\Panels\LayoutWidthCanvas.xaml.cs">
+      <DependentUpon>LayoutWidthCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\test\Panels\LayoutWithDockPanel.xaml.cs">
+      <DependentUpon>LayoutWithDockPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\test\Panels\LayoutWithStackPanel.xaml.cs">
+      <DependentUpon>LayoutWithStackPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\test\Panels\WrapPanel.xaml.cs">
+      <DependentUpon>WrapPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\TooBuzyServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="GUI\test\Controls\SimpleForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\test\Panels\LayoutWidthRowsAndColumns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\test\Panels\LayoutWidthCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\test\Panels\LayoutWithDockPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\test\Panels\LayoutWithStackPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\test\Panels\WrapPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

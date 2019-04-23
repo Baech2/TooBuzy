@@ -177,4 +177,5 @@ namespace TooBuzyDataAccess
                 scope.Complete();
             }
         }
+    }
 }

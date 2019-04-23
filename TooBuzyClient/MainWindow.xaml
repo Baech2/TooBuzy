@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TooBuzyClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="552.684" Width="693.079">
+        Title="Consumer CRUD" Height="552.684" Width="693.079">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="153*"/>
