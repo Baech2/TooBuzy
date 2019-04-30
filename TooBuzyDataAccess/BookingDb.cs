@@ -15,7 +15,7 @@ namespace TooBuzyDataAccess
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Booking entity)
+        public bool Create(Booking entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -41,9 +41,9 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
-
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -68,8 +68,8 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
-
         public IEnumerable<Booking> GetAll()
         {
             List<Booking> bookings = new List<Booking>();
@@ -105,8 +105,6 @@ namespace TooBuzyDataAccess
             }
             return bookings;
         }
-
-
         public Booking GetById(int Id)
         {
             Booking booking = new Booking();
@@ -140,13 +138,7 @@ namespace TooBuzyDataAccess
             }
             return booking;
         }
-
-        public Booking GetByInt(int phone)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Booking entity)
+        public bool Update(Booking entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -172,6 +164,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
     }
 }

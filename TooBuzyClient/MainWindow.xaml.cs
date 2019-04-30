@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TooBuzyClient.GUI.ConsumerUI;
 using TooBuzyEntities;
 
 namespace TooBuzyClient
@@ -72,7 +73,7 @@ namespace TooBuzyClient
             {
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    int ParsedPhoneNo = -1;
+                    int ParsedPhoneNo;
                     if (int.TryParse(txtPhoneNo.Text, out ParsedPhoneNo))
                     {
                         Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = txtPassword.Text };
@@ -153,34 +154,11 @@ namespace TooBuzyClient
             }
         }
 
-        private void btnConsumerUpdate_Click(object sender, RoutedEventArgs e)
+        private void OpenNewWindow_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
-            try
-            {
-                if (!string.IsNullOrEmpty(txtNameUpdate.Text) && !string.IsNullOrEmpty(txtPhoneNoUpdate.Text) && !string.IsNullOrEmpty(txtPasswordUpdate.Text))
-                {
-                    int ParsedId;
-                    int PhoneNoUpdate;
-                    if (int.TryParse(txtIdUpdate.Text, out ParsedId) && int.TryParse(txtPhoneNoUpdate.Text, out PhoneNoUpdate))
-                    {
-                        Consumer UpdateConsumer = new Consumer { Id = ParsedId, Name = txtNameUpdate.Text, PhoneNo = PhoneNoUpdate, Password = txtPasswordUpdate.Text };
-                        client.UpdateConsumer(UpdateConsumer);
-                        updateConsumerListBox();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Failed to load server data." + ex.Message);
-            }
-            finally
-            {
-                client.Close();
-            }
-
+            Visibility = Visibility.Collapsed;
+            var newW = new UpdateConsumer();
+            newW.ShowDialog();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TooBuzyDataAccess
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Order entity)
+        public bool Create(Order entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.RepeatableRead;
@@ -30,17 +30,17 @@ namespace TooBuzyDataAccess
                     int insertedId;
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO [Order] (TotalPrice, Date, BookingId) OUTPUT INSERTED.ID VALUES (@TotalPrice, @Date, @BookingId)s";
+                        cmd.CommandText = "INSERT INTO [Order] (TotalPrice, Date, BookingId) OUTPUT INSERTED.ID VALUES (@TotalPrice, @Date, @BookingId)";
                         cmd.Parameters.AddWithValue("TotalPrice", entity.TotalPrice);
                         cmd.Parameters.AddWithValue("Date", entity.Date);
-                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
+                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId); 
                         insertedId = (int)cmd.ExecuteScalar();
                     }
                     foreach (OrderLine ol in entity.OrderLines)
                     {
                         using (SqlCommand cmd = connection.CreateCommand())
                         {
-                            cmd.CommandText = "SELCET Stock FROM Product WHERE Id = @Id";
+                            cmd.CommandText = "SELECT Stock FROM Product WHERE Id = @Id";
                             cmd.Parameters.AddWithValue("Id", ol.ProductId);
                             var quantityInStock = (int)cmd.ExecuteScalar();
                             if (quantityInStock < ol.Quantity)
@@ -61,7 +61,7 @@ namespace TooBuzyDataAccess
 
                                 using (SqlCommand decrementCmd = connection.CreateCommand())
                                 {
-                                    decrementCmd.CommandText = "UPDATE Product SET Quantity = @Quantity WHERE Id = @Id";
+                                    decrementCmd.CommandText = "UPDATE Product SET Stock = Stock-@Quantity WHERE Id = @Id";
                                     decrementCmd.Parameters.AddWithValue("Id", ol.ProductId);
                                     decrementCmd.Parameters.AddWithValue("Quantity", ol.Quantity);
                                     decrementCmd.ExecuteNonQuery();
@@ -75,9 +75,10 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -102,6 +103,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
 
         public IEnumerable<Order> GetAll()
@@ -170,12 +172,8 @@ namespace TooBuzyDataAccess
             }
             return order;
         }
-        public Order GetByInt(int phone)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Update(Order entity)
+        public bool Update(Order entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -202,6 +200,8 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
+        
     }
 }

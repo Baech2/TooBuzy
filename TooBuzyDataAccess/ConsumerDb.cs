@@ -12,11 +12,11 @@ using TooBuzyEntities;
 
 namespace TooBuzyDataAccess
 {
-    public class ConsumerDb : ICRUD<Consumer>
+    public class ConsumerDb : ICRUD<Consumer>, IConsumer
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Consumer entity)
+        public bool Create(Consumer entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -27,23 +27,57 @@ namespace TooBuzyDataAccess
                     connection.Open();
                     Console.WriteLine("----------------");
                     Console.WriteLine("Creating consumer:" + entity.Name + " " + entity.PhoneNo);
+                    int insertedId;
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Consumer (Name, PhoneNo, Password) VALUES (@Name, @PhoneNo, @Password)";
+                        cmd.CommandText = "SELECT Name FROM Consumer WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Name", entity.Name);
-                        cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
-                        cmd.Parameters.AddWithValue("Password", entity.Password);
-                        cmd.ExecuteNonQuery();
+                        System.Data.DataSet ds = new System.Data.DataSet();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(ds);
+
+                        bool fail = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
+
+                        if (fail)
+                        {
+                            Console.WriteLine("Username already exists");
+                            return false;
+                        }
+                        else
+                        {
+
+                            using (SqlCommand Ccmd = connection.CreateCommand())
+                            {
+                                Ccmd.CommandText = "INSERT INTO Consumer (Name, PhoneNo, Password) OUTPUT INSERTED.Id VALUES (@Name, @PhoneNo, @Password)";
+                                Ccmd.Parameters.AddWithValue("Name", entity.Name);
+                                Ccmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                                Ccmd.Parameters.AddWithValue("Password", entity.Password);
+                                insertedId = (int)Ccmd.ExecuteScalar();
+                            }
+                            foreach (Booking bk in entity.Bookings)
+                            {
+                                using (SqlCommand bkcmd = connection.CreateCommand())
+                                {
+                                    bkcmd.CommandText = "SELECET Id, Date, ConsumerId FROM Consumer WHERE ConsumerId = @ConsumerId";
+                                    bkcmd.Parameters.AddWithValue("Id", bk.Id);
+                                    bkcmd.Parameters.AddWithValue("Date", bk.Date);
+                                    bkcmd.Parameters.AddWithValue("ConsumerId", insertedId);
+                                    bkcmd.ExecuteNonQuery();
+                                }
+                            }
+                            Console.WriteLine("Consumer created");
+                            Console.WriteLine("----------------");
+                            connection.Close();
+                            scope.Complete();
+                            return true;
+                        }
                     }
-                    Console.WriteLine("Consumer created");
-                    Console.WriteLine("----------------");
                 }
-                scope.Complete();
             }
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -67,6 +101,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
 
         public IEnumerable<Consumer> GetAll()
@@ -128,45 +163,26 @@ namespace TooBuzyDataAccess
                             consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
                             consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
                         }
+                        reader.Close();
                     }
-                    connection.Close();
-                    Console.WriteLine("Returning the Consumer with id: " + Id);
-                    Console.WriteLine("----------------");
-                }
-                scope.Complete();
-            }
-            return consumer;
-        }
-
-
-        public Consumer GetByInt(int phone)
-        {
-            Consumer consumer = new Consumer();
-            TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
-            {
-
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    Console.WriteLine("----------------");
-                    Console.WriteLine("Getting Consumer by inserted phone number:" + phone);
-
-                    using (SqlCommand cmd = connection.CreateCommand())
+                    using (SqlCommand BCmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, PhoneNo FROM Consumer where PhoneNo = @PhoneNo";
-                        cmd.Parameters.AddWithValue("PhoneNo", phone);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        BCmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking WHERE ConsumerId = @ConsumerId";
+                        BCmd.Parameters.AddWithValue("ConsumerId", Id);
+                        SqlDataReader reader = BCmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            consumer.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                            consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
-                            consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            consumer.Bookings.Add(
+                                new Booking
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                                    ConsumerId = Id
+                                });
                         }
                     }
                     connection.Close();
-                    Console.WriteLine("Returning Consumer by inserted phone number: " + phone);
+                    Console.WriteLine("Returning the Consumer with id: " + Id + consumer.Bookings.ToList().FirstOrDefault());
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();
@@ -174,7 +190,17 @@ namespace TooBuzyDataAccess
             return consumer;
         }
 
-        public void Update(Consumer entity)
+        public Consumer GetByInt(int phone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Login(string Name, string Password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Consumer entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -188,8 +214,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Consumer SET Name = @Name, PhoneNo = @PhoneNo, Password = @Password WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("Id", entity.Id);
+                        cmd.CommandText = "UPDATE Consumer SET PhoneNo = @PhoneNo, Password = @Password WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
                         cmd.Parameters.AddWithValue("Password", entity.Password);
@@ -201,6 +226,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
     }
 }

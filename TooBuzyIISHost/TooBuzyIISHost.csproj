@@ -122,6 +122,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\TooBuzyServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,6 +134,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\TooBuzyServiceReference\item.disco" />
+    <None Include="Connected Services\TooBuzyServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\TooBuzyServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\TooBuzyServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -139,6 +151,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Connected Services\TooBuzyServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TooBuzyServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TooBuzyServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyIISHost.TooBuzyServiceReference.Consumer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\TooBuzyServiceReference\TooBuzyService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -188,6 +213,12 @@
       <Project>{d4558ac3-3a46-4e27-b139-6744f4688dc2}</Project>
       <Name>TooBuzyServices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TooBuzyServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

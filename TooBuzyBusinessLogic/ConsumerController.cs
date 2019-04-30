@@ -10,20 +10,25 @@ using TooBuzyEntities;
 
 namespace TooBuzyBusinessLogic
 {
-    public class ConsumerController : ICRUD<Consumer>
+    public class ConsumerController  /*ICRUD<Consumer>*/
     {
         private ConsumerDb _ConsumerDb = new ConsumerDb();
-        public void Create(Consumer entity)
+        public bool Create(Consumer entity)
         {
+            bool tt = false;
             if (entity != null)
             {
-                _ConsumerDb.Create(entity);
+                tt = _ConsumerDb.Create(entity);
             }
+            return tt;
         }
 
         public void Delete(int Id)
         {
-            _ConsumerDb.Delete(Id);
+            if (Id != 0)
+            {
+                _ConsumerDb.Delete(Id);
+            }
         }
 
         public IEnumerable<Consumer> GetAll()
@@ -33,20 +38,37 @@ namespace TooBuzyBusinessLogic
 
         public Consumer GetById(int Id)
         {
-            return _ConsumerDb.GetById(Id);
+            if (Id != 0)
+            {
+                return _ConsumerDb.GetById(Id);
+            }
+            else
+            {
+                throw new Exception("Id is invalid");
+            }
         }
 
         public Consumer GetByInt(int phone)
         {
-            return _ConsumerDb.GetByInt(phone);
+            if (phone.ToString().Length >= 8)
+            {
+                return _ConsumerDb.GetByInt(phone);
+            }
+            else
+            {
+                throw new Exception("Phone Number is invalid");
+            }
         }
 
-        public void Update(Consumer entity)
+        public bool Update(Consumer entity)
         {
+            bool tt = false;
             if (entity != null)
             {
-                _ConsumerDb.Update(entity);
+                tt = _ConsumerDb.Update(entity);
+                return tt;
             }
+            return tt;
         }
     }
 }

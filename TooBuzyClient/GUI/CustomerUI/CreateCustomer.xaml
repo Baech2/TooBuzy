@@ -1,0 +1,46 @@
+﻿<Window x:Class="TooBuzyClient.GUI.CustomerUI.CreateCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TooBuzyClient.GUI.CustomerUI"
+        mc:Ignorable="d"
+        Title="Opret kunde" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Restaurant navn :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="1" Margin="10"/>
+        <TextBox Name="txtName" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="1" Margin="10" />
+
+        <TextBlock Text="Type mad:" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2" Margin="10"/>
+        <TextBox Name="txtType" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="2" Margin="10" />
+
+        <TextBlock Text="Postnummer :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="3" Margin="10"/>
+        <TextBox Name="txtZipCode" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="3" Margin="10" />
+
+        <TextBlock Text="Adresse :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="4" Margin="10"/>
+        <TextBox Name="txtAddress" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="4" Margin="10" />
+
+        <TextBlock Text="Telefon nummer :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="5" Margin="10"/>
+        <TextBox Name="txtPhoneNo" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="5" Margin="10" />
+
+        <TextBlock Text="Password :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Margin="10"/>
+        <TextBox Name="txtPassword" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="6" Margin="10" />
+
+        <Button Content="Login" Grid.Row="7" Margin="10" Padding="5" HorizontalAlignment="Right" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
+
+    </Grid>
+</Window>

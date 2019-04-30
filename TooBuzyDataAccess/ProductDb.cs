@@ -12,7 +12,7 @@ namespace TooBuzyDataAccess
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Product entity)
+        public bool Create(Product entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -40,9 +40,10 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
         //skal ændres til et update statement så isdeleted bliver benyttet
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -64,6 +65,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
 
         public IEnumerable<Product> GetAll()
@@ -139,12 +141,7 @@ namespace TooBuzyDataAccess
             return product;
         }
 
-        public Product GetByInt(int phone)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Product entity)
+        public bool Update(Product entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -175,6 +172,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
     }
 }

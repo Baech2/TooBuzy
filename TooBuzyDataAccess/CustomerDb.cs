@@ -11,11 +11,11 @@ using TooBuzyEntities;
 
 namespace TooBuzyDataAccess
 {
-    public class CustomerDb : ICRUD<Customer>
+    public class CustomerDb : ICRUD<Customer>, ICustomer
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
 
-        public void Create(Customer entity)
+        public bool Create(Customer entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -29,23 +29,43 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Password) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Password)";
+                        cmd.CommandText = "SELECT Name FROM Consumer WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Name", entity.Name);
-                        cmd.Parameters.AddWithValue("Type", entity.Type);
-                        cmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
-                        cmd.Parameters.AddWithValue("Address", entity.Address);
-                        cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
-                        cmd.Parameters.AddWithValue("Password", entity.Password);
-                    }
-                    Console.WriteLine("Customer created");
-                    Console.WriteLine("----------------");
+                        System.Data.DataSet ds = new System.Data.DataSet();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(ds);
 
+                        bool fail = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
+
+                        if (fail)
+                        {
+                            Console.WriteLine("Customer wasnt created!");
+                            return false;
+                        }
+                        else
+                        {
+                            using (SqlCommand Ccmd = connection.CreateCommand())
+                            {
+                                Ccmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Password) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Password)";
+                                Ccmd.Parameters.AddWithValue("Name", entity.Name);
+                                Ccmd.Parameters.AddWithValue("Type", entity.Type);
+                                Ccmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
+                                Ccmd.Parameters.AddWithValue("Address", entity.Address);
+                                Ccmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                                Ccmd.Parameters.AddWithValue("Password", entity.Password);
+                            }
+                            Console.WriteLine("Customer created");
+                            Console.WriteLine("----------------");
+                            connection.Close();
+                            scope.Complete();
+                            return true;
+                        }
+                    }
                 }
-                scope.Complete();
             }
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -72,6 +92,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
         public IEnumerable<Customer> GetAll()
         {
@@ -186,7 +207,54 @@ namespace TooBuzyDataAccess
             return customer;
         }
 
-        public void Update(Customer entity)
+        public bool Login(string Name, string Password)
+        {
+            //TransactionOptions options = new TransactionOptions();
+            //options.IsolationLevel = IsolationLevel.ReadUncommitted;
+            //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
+            //{
+            //    using (SqlConnection connection = new SqlConnection(_connectionString))
+            //    {
+            //        connection.Open();
+            //        Console.WriteLine("------------");
+            //        Console.WriteLine("Attempting to login a Customer");
+
+            //        using (SqlCommand cmd = connection.CreateCommand())
+            //        {
+            //            cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE Name = @Name AND Password = @Password";
+            //            cmd.Parameters.AddWithValue("Name", Name);
+            //            cmd.Parameters.AddWithValue("Password", Password);
+
+            //            System.Data.DataSet ds = new System.Data.DataSet();
+            //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //            da.Fill(ds);
+
+            //            bool Success = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
+
+            //            if (Success)
+            //            {
+            //                //skal håndteres anderledes. Gerne med meddelelse
+            //                Console.WriteLine("Customer Login Succeded! " + Name);
+            //                connection.Close();
+            //                scope.Complete();
+
+            //            }
+            //            else
+            //            {
+            //                //Denne exception skal håndres anderledes. Gerne i UI
+            //                connection.Close();
+            //                scope.Complete();
+            //                return false;
+            //            }
+            //        }
+
+            //    }
+
+            //}
+            return true;
+        }
+
+        public bool Update(Customer entity)
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = IsolationLevel.ReadCommitted;
@@ -200,7 +268,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Customer SET Name = @Name, Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE Customer SET Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Type", entity.Type);
@@ -216,6 +284,7 @@ namespace TooBuzyDataAccess
                 }
                 scope.Complete();
             }
+            return true;
         }
     }
 }

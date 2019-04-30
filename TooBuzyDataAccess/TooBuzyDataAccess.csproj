@@ -45,7 +45,9 @@
     <Compile Include="BookingDb.cs" />
     <Compile Include="ConsumerDb.cs" />
     <Compile Include="CustomerDb.cs" />
+    <Compile Include="Interfaces\IConsumer.cs" />
     <Compile Include="Interfaces\ICRUD.cs" />
+    <Compile Include="Interfaces\ICustomer.cs" />
     <Compile Include="MenuDb.cs" />
     <Compile Include="OrderDb.cs" />
     <Compile Include="OrderLineDb.cs" />
