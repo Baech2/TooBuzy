@@ -13,6 +13,7 @@ namespace TooBuzyEntities
         public Customer()
         {
             Tables = new List<Table>();
+            Createdate = DateTime.Now;
         }
         [DataMember]
         public int Id { get; set; }
@@ -30,5 +31,11 @@ namespace TooBuzyEntities
         public string Password { get; set; }
         [DataMember]
         public List<Table> Tables { get; set; }
+        [DataMember]
+        public DateTime Createdate { get; set; }
+        [DataMember]
+        public int MenuId { get; set; }
+        [DataMember]
+        public Menu menu { get; set; }
     }
 }

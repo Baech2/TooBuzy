@@ -31,7 +31,7 @@ namespace TooBuzyDataAccess
                     {
                         cmd.CommandText = "INSERT INTO Menu (Category, Description, CustomerId) VALUES (@Category, @Description, @CustomerId)";
                         cmd.Parameters.AddWithValue("Category", entity.Category);
-                        cmd.Parameters.AddWithValue("Desciption", entity.Description);
+                        cmd.Parameters.AddWithValue("Description", entity.Description);
                         cmd.ExecuteNonQuery();
                     }
                     Console.WriteLine("-----------------");
@@ -86,7 +86,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description, CustomerId FROM Menu";
+                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -94,7 +94,6 @@ namespace TooBuzyDataAccess
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
-                            menu.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                             menus.Add(menu);
                         }
                     }
@@ -124,14 +123,33 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description, CustomerId FROM Menu";
+                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
-                            menu.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
+                        }
+                        reader.Close();
+                    }
+                    using (SqlCommand Mcmd = connection.CreateCommand())
+                    {
+                        Mcmd.CommandText = "SELECT Id, ProductName, Description, Price, ImageUrl, IsDeleted, MenuId FROM Product WHERE MenuId = @MenuId ";
+                        Mcmd.Parameters.AddWithValue("MenuId", Id);
+                        SqlDataReader reader = Mcmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            menu.Products.Add(new Product
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
+                                Description = reader.GetString(reader.GetOrdinal("Description")),
+                                Price = reader.GetDecimal(reader.GetOrdinal("Price")),
+                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                                IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted")),
+                                MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"))
+                            });
                         }
                     }
                     Console.WriteLine("Returning Menu by inserted Id:" + Id);
@@ -162,7 +180,6 @@ namespace TooBuzyDataAccess
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Category", entity.Category);
                         cmd.Parameters.AddWithValue("Description", entity.Description);
-                        cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                     }
                     Console.WriteLine("Menu updated");
                     Console.WriteLine("----------------");

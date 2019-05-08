@@ -12,17 +12,24 @@ namespace TooBuzyBusinessLogic
     public class OrderController : ICRUD<Order>
     {
         private OrderDb _OrderDb = new OrderDb();
-        public void Create(Order entity)
+        public bool Create(Order entity)
         {
+            bool orderCreated = false;
             if (entity != null)
             {
-                _OrderDb.Create(entity);
+               orderCreated = _OrderDb.Create(entity);
             }
+            return orderCreated;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _OrderDb.Delete(Id);
+            bool orderDelted = false;
+            if (Id != 0)
+            {
+                orderDelted = _OrderDb.Delete(Id);
+            }
+            return orderDelted;
         }
 
         public IEnumerable<Order> GetAll()
@@ -35,17 +42,14 @@ namespace TooBuzyBusinessLogic
             return _OrderDb.GetById(Id);
         }
 
-        public Order GetByInt(int phone)
+        public bool Update(Order entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Order entity)
-        {
+            bool orderUpdated = false;
             if (entity != null)
             {
-                _OrderDb.Update(entity);
+                orderUpdated =_OrderDb.Update(entity);
             }
+            return orderUpdated;
         }
     }
 }

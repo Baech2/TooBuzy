@@ -22,10 +22,6 @@ namespace TooBuzyEntities
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public Customer Customer { get; set; }
-        [DataMember]
-        public int? CustomerId { get; set; }
-        [DataMember]
         public List<Product> Products { get; set; }
     }
 }

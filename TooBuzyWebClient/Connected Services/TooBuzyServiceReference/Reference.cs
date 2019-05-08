@@ -144,7 +144,10 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TooBuzyWebClient.TooBuzyServiceReference.Table[] TablesField;
+        private TooBuzyWebClient.TooBuzyServiceReference.Table TableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TableIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -209,14 +212,27 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TooBuzyWebClient.TooBuzyServiceReference.Table[] Tables {
+        public TooBuzyWebClient.TooBuzyServiceReference.Table Table {
             get {
-                return this.TablesField;
+                return this.TableField;
             }
             set {
-                if ((object.ReferenceEquals(this.TablesField, value) != true)) {
-                    this.TablesField = value;
-                    this.RaisePropertyChanged("Tables");
+                if ((object.ReferenceEquals(this.TableField, value) != true)) {
+                    this.TableField = value;
+                    this.RaisePropertyChanged("Table");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TableId {
+            get {
+                return this.TableIdField;
+            }
+            set {
+                if ((this.TableIdField.Equals(value) != true)) {
+                    this.TableIdField = value;
+                    this.RaisePropertyChanged("TableId");
                 }
             }
         }
@@ -241,10 +257,7 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private TooBuzyWebClient.TooBuzyServiceReference.Booking BookingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> BookingIdField;
+        private TooBuzyWebClient.TooBuzyServiceReference.Booking[] BookingsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TooBuzyWebClient.TooBuzyServiceReference.Customer CustomerField;
@@ -272,27 +285,14 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public TooBuzyWebClient.TooBuzyServiceReference.Booking Booking {
+        public TooBuzyWebClient.TooBuzyServiceReference.Booking[] Bookings {
             get {
-                return this.BookingField;
+                return this.BookingsField;
             }
             set {
-                if ((object.ReferenceEquals(this.BookingField, value) != true)) {
-                    this.BookingField = value;
-                    this.RaisePropertyChanged("Booking");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> BookingId {
-            get {
-                return this.BookingIdField;
-            }
-            set {
-                if ((this.BookingIdField.Equals(value) != true)) {
-                    this.BookingIdField = value;
-                    this.RaisePropertyChanged("BookingId");
+                if ((object.ReferenceEquals(this.BookingsField, value) != true)) {
+                    this.BookingsField = value;
+                    this.RaisePropertyChanged("Bookings");
                 }
             }
         }
@@ -385,7 +385,13 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private string AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreatedateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MenuIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -404,6 +410,9 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ZipCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Menu menuField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -429,6 +438,19 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Createdate {
+            get {
+                return this.CreatedateField;
+            }
+            set {
+                if ((this.CreatedateField.Equals(value) != true)) {
+                    this.CreatedateField = value;
+                    this.RaisePropertyChanged("Createdate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
                 return this.IdField;
@@ -437,6 +459,19 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MenuId {
+            get {
+                return this.MenuIdField;
+            }
+            set {
+                if ((this.MenuIdField.Equals(value) != true)) {
+                    this.MenuIdField = value;
+                    this.RaisePropertyChanged("MenuId");
                 }
             }
         }
@@ -519,6 +554,583 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Menu menu {
+            get {
+                return this.menuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.menuField, value) != true)) {
+                    this.menuField = value;
+                    this.RaisePropertyChanged("menu");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Menu", Namespace="http://schemas.datacontract.org/2004/07/TooBuzyEntities")]
+    [System.SerializableAttribute()]
+    public partial class Menu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Product[] ProductsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Category {
+            get {
+                return this.CategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CategoryField, value) != true)) {
+                    this.CategoryField = value;
+                    this.RaisePropertyChanged("Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Product[] Products {
+            get {
+                return this.ProductsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductsField, value) != true)) {
+                    this.ProductsField = value;
+                    this.RaisePropertyChanged("Products");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Product", Namespace="http://schemas.datacontract.org/2004/07/TooBuzyEntities")]
+    [System.SerializableAttribute()]
+    public partial class Product : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImageUrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeletedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Menu MenuField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MenuIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] OrderlinesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProductNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StockField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ImageUrl {
+            get {
+                return this.ImageUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageUrlField, value) != true)) {
+                    this.ImageUrlField = value;
+                    this.RaisePropertyChanged("ImageUrl");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeleted {
+            get {
+                return this.IsDeletedField;
+            }
+            set {
+                if ((this.IsDeletedField.Equals(value) != true)) {
+                    this.IsDeletedField = value;
+                    this.RaisePropertyChanged("IsDeleted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Menu Menu {
+            get {
+                return this.MenuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MenuField, value) != true)) {
+                    this.MenuField = value;
+                    this.RaisePropertyChanged("Menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MenuId {
+            get {
+                return this.MenuIdField;
+            }
+            set {
+                if ((this.MenuIdField.Equals(value) != true)) {
+                    this.MenuIdField = value;
+                    this.RaisePropertyChanged("MenuId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] Orderlines {
+            get {
+                return this.OrderlinesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderlinesField, value) != true)) {
+                    this.OrderlinesField = value;
+                    this.RaisePropertyChanged("Orderlines");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProductName {
+            get {
+                return this.ProductNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductNameField, value) != true)) {
+                    this.ProductNameField = value;
+                    this.RaisePropertyChanged("ProductName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Stock {
+            get {
+                return this.StockField;
+            }
+            set {
+                if ((this.StockField.Equals(value) != true)) {
+                    this.StockField = value;
+                    this.RaisePropertyChanged("Stock");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OrderLine", Namespace="http://schemas.datacontract.org/2004/07/TooBuzyEntities")]
+    [System.SerializableAttribute()]
+    public partial class OrderLine : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Order OrderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Product ProductField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal SubTotalField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Order Order {
+            get {
+                return this.OrderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderField, value) != true)) {
+                    this.OrderField = value;
+                    this.RaisePropertyChanged("Order");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrderId {
+            get {
+                return this.OrderIdField;
+            }
+            set {
+                if ((this.OrderIdField.Equals(value) != true)) {
+                    this.OrderIdField = value;
+                    this.RaisePropertyChanged("OrderId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Product Product {
+            get {
+                return this.ProductField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProductField, value) != true)) {
+                    this.ProductField = value;
+                    this.RaisePropertyChanged("Product");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductId {
+            get {
+                return this.ProductIdField;
+            }
+            set {
+                if ((this.ProductIdField.Equals(value) != true)) {
+                    this.ProductIdField = value;
+                    this.RaisePropertyChanged("ProductId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal SubTotal {
+            get {
+                return this.SubTotalField;
+            }
+            set {
+                if ((this.SubTotalField.Equals(value) != true)) {
+                    this.SubTotalField = value;
+                    this.RaisePropertyChanged("SubTotal");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Order", Namespace="http://schemas.datacontract.org/2004/07/TooBuzyEntities")]
+    [System.SerializableAttribute()]
+    public partial class Order : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.Booking BookingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int BookingIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreatedateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] OrderLinesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal TotalPriceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.Booking Booking {
+            get {
+                return this.BookingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BookingField, value) != true)) {
+                    this.BookingField = value;
+                    this.RaisePropertyChanged("Booking");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int BookingId {
+            get {
+                return this.BookingIdField;
+            }
+            set {
+                if ((this.BookingIdField.Equals(value) != true)) {
+                    this.BookingIdField = value;
+                    this.RaisePropertyChanged("BookingId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Createdate {
+            get {
+                return this.CreatedateField;
+            }
+            set {
+                if ((this.CreatedateField.Equals(value) != true)) {
+                    this.CreatedateField = value;
+                    this.RaisePropertyChanged("Createdate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] OrderLines {
+            get {
+                return this.OrderLinesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderLinesField, value) != true)) {
+                    this.OrderLinesField = value;
+                    this.RaisePropertyChanged("OrderLines");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TotalPrice {
+            get {
+                return this.TotalPriceField;
+            }
+            set {
+                if ((this.TotalPriceField.Equals(value) != true)) {
+                    this.TotalPriceField = value;
+                    this.RaisePropertyChanged("TotalPrice");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -534,10 +1146,10 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
     public interface ITooBuzyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/CreateConsumerResponse")]
-        void CreateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
+        bool CreateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/CreateConsumerResponse")]
-        System.Threading.Tasks.Task CreateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
+        System.Threading.Tasks.Task<bool> CreateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetConsumerById", ReplyAction="http://tempuri.org/ITooBuzyService/GetConsumerByIdResponse")]
         TooBuzyWebClient.TooBuzyServiceReference.Consumer GetConsumerById(int Id);
@@ -552,22 +1164,208 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Consumer[]> GetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateConsumerResponse")]
-        void UpdateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
+        bool UpdateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateConsumerResponse")]
-        System.Threading.Tasks.Task UpdateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
+        System.Threading.Tasks.Task<bool> UpdateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteConsumerResponse")]
-        void DeleteConsumer(int Id);
+        bool DeleteConsumer(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteConsumer", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteConsumerResponse")]
-        System.Threading.Tasks.Task DeleteConsumerAsync(int Id);
+        System.Threading.Tasks.Task<bool> DeleteConsumerAsync(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetByInt", ReplyAction="http://tempuri.org/ITooBuzyService/GetByIntResponse")]
         TooBuzyWebClient.TooBuzyServiceReference.Consumer GetByInt(int phone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetByInt", ReplyAction="http://tempuri.org/ITooBuzyService/GetByIntResponse")]
         System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Consumer> GetByIntAsync(int phone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/CreateCustomerResponse")]
+        bool CreateCustomer(TooBuzyWebClient.TooBuzyServiceReference.Customer customer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/CreateCustomerResponse")]
+        System.Threading.Tasks.Task<bool> CreateCustomerAsync(TooBuzyWebClient.TooBuzyServiceReference.Customer customer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetCustomerById", ReplyAction="http://tempuri.org/ITooBuzyService/GetCustomerByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Customer GetCustomerById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetCustomerById", ReplyAction="http://tempuri.org/ITooBuzyService/GetCustomerByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer> GetCustomerByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetCustomerByPhone", ReplyAction="http://tempuri.org/ITooBuzyService/GetCustomerByPhoneResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Customer GetCustomerByPhone(int phone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetCustomerByPhone", ReplyAction="http://tempuri.org/ITooBuzyService/GetCustomerByPhoneResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer> GetCustomerByPhoneAsync(int phone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllCustomers", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllCustomersResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Customer[] GetAllCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllCustomers", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllCustomersResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer[]> GetAllCustomersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateCustomerResponse")]
+        bool UpdateCustomer(TooBuzyWebClient.TooBuzyServiceReference.Customer customer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateCustomerResponse")]
+        System.Threading.Tasks.Task<bool> UpdateCustomerAsync(TooBuzyWebClient.TooBuzyServiceReference.Customer customer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteCustomerResponse")]
+        bool DeleteCustomer(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteCustomer", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteCustomerResponse")]
+        System.Threading.Tasks.Task<bool> DeleteCustomerAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateProduct", ReplyAction="http://tempuri.org/ITooBuzyService/CreateProductResponse")]
+        bool CreateProduct(TooBuzyWebClient.TooBuzyServiceReference.Product product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateProduct", ReplyAction="http://tempuri.org/ITooBuzyService/CreateProductResponse")]
+        System.Threading.Tasks.Task<bool> CreateProductAsync(TooBuzyWebClient.TooBuzyServiceReference.Product product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetProductById", ReplyAction="http://tempuri.org/ITooBuzyService/GetProductByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Product GetProductById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetProductById", ReplyAction="http://tempuri.org/ITooBuzyService/GetProductByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Product> GetProductByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllProducts", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllProductsResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Product[] GetAllProducts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllProducts", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllProductsResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Product[]> GetAllProductsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateProduct", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateProductResponse")]
+        bool UpdateProduct(TooBuzyWebClient.TooBuzyServiceReference.Product product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateProduct", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateProductResponse")]
+        System.Threading.Tasks.Task<bool> UpdateProductAsync(TooBuzyWebClient.TooBuzyServiceReference.Product product);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteProduct", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteProductResponse")]
+        bool DeleteProduct(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteProduct", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteProductResponse")]
+        System.Threading.Tasks.Task<bool> DeleteProductAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateBooking", ReplyAction="http://tempuri.org/ITooBuzyService/CreateBookingResponse")]
+        bool CreateBooking(TooBuzyWebClient.TooBuzyServiceReference.Booking booking);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateBooking", ReplyAction="http://tempuri.org/ITooBuzyService/CreateBookingResponse")]
+        System.Threading.Tasks.Task<bool> CreateBookingAsync(TooBuzyWebClient.TooBuzyServiceReference.Booking booking);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetBookingById", ReplyAction="http://tempuri.org/ITooBuzyService/GetBookingByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Booking GetBookingById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetBookingById", ReplyAction="http://tempuri.org/ITooBuzyService/GetBookingByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Booking> GetBookingByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllBookings", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllBookingsResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Booking[] GetAllBookings();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllBookings", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllBookingsResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Booking[]> GetAllBookingsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateBooking", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateBookingResponse")]
+        bool UpdateBooking(TooBuzyWebClient.TooBuzyServiceReference.Booking booking);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateBooking", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateBookingResponse")]
+        System.Threading.Tasks.Task<bool> UpdateBookingAsync(TooBuzyWebClient.TooBuzyServiceReference.Booking booking);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteBooking", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteBookingResponse")]
+        bool DeleteBooking(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteBooking", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteBookingResponse")]
+        System.Threading.Tasks.Task<bool> DeleteBookingAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateMenu", ReplyAction="http://tempuri.org/ITooBuzyService/CreateMenuResponse")]
+        bool CreateMenu(TooBuzyWebClient.TooBuzyServiceReference.Menu menu);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateMenu", ReplyAction="http://tempuri.org/ITooBuzyService/CreateMenuResponse")]
+        System.Threading.Tasks.Task<bool> CreateMenuAsync(TooBuzyWebClient.TooBuzyServiceReference.Menu menu);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetMenuById", ReplyAction="http://tempuri.org/ITooBuzyService/GetMenuByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Menu GetMenuById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetMenuById", ReplyAction="http://tempuri.org/ITooBuzyService/GetMenuByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Menu> GetMenuByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllMenus", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllMenusResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Menu[] GetAllMenus();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllMenus", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllMenusResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Menu[]> GetAllMenusAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateMenu", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateMenuResponse")]
+        bool UpdateMenu(TooBuzyWebClient.TooBuzyServiceReference.Menu menu);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateMenu", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateMenuResponse")]
+        System.Threading.Tasks.Task<bool> UpdateMenuAsync(TooBuzyWebClient.TooBuzyServiceReference.Menu menu);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteMenu", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteMenuResponse")]
+        bool DeleteMenu(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteMenu", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteMenuResponse")]
+        System.Threading.Tasks.Task<bool> DeleteMenuAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateOrder", ReplyAction="http://tempuri.org/ITooBuzyService/CreateOrderResponse")]
+        bool CreateOrder(TooBuzyWebClient.TooBuzyServiceReference.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateOrder", ReplyAction="http://tempuri.org/ITooBuzyService/CreateOrderResponse")]
+        System.Threading.Tasks.Task<bool> CreateOrderAsync(TooBuzyWebClient.TooBuzyServiceReference.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetOrderById", ReplyAction="http://tempuri.org/ITooBuzyService/GetOrderByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Order GetOrderById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetOrderById", ReplyAction="http://tempuri.org/ITooBuzyService/GetOrderByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Order> GetOrderByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllOrders", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllOrdersResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Order[] GetAllOrders();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllOrders", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllOrdersResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Order[]> GetAllOrdersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateOrder", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateOrderResponse")]
+        bool UpdateOrder(TooBuzyWebClient.TooBuzyServiceReference.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateOrder", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateOrderResponse")]
+        System.Threading.Tasks.Task<bool> UpdateOrderAsync(TooBuzyWebClient.TooBuzyServiceReference.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteOrder", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteOrderResponse")]
+        bool DeleteOrder(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteOrder", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteOrderResponse")]
+        System.Threading.Tasks.Task<bool> DeleteOrderAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateTable", ReplyAction="http://tempuri.org/ITooBuzyService/CreateTableResponse")]
+        bool CreateTable(TooBuzyWebClient.TooBuzyServiceReference.Table table);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/CreateTable", ReplyAction="http://tempuri.org/ITooBuzyService/CreateTableResponse")]
+        System.Threading.Tasks.Task<bool> CreateTableAsync(TooBuzyWebClient.TooBuzyServiceReference.Table table);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetTableById", ReplyAction="http://tempuri.org/ITooBuzyService/GetTableByIdResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Table GetTableById(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetTableById", ReplyAction="http://tempuri.org/ITooBuzyService/GetTableByIdResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Table> GetTableByIdAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllTables", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllTablesResponse")]
+        TooBuzyWebClient.TooBuzyServiceReference.Table[] GetAllTables();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/GetAllTables", ReplyAction="http://tempuri.org/ITooBuzyService/GetAllTablesResponse")]
+        System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Table[]> GetAllTablesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateTable", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateTableResponse")]
+        bool UpdateTable(TooBuzyWebClient.TooBuzyServiceReference.Table table);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/UpdateTable", ReplyAction="http://tempuri.org/ITooBuzyService/UpdateTableResponse")]
+        System.Threading.Tasks.Task<bool> UpdateTableAsync(TooBuzyWebClient.TooBuzyServiceReference.Table table);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteTable", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteTableResponse")]
+        bool DeleteTable(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITooBuzyService/DeleteTable", ReplyAction="http://tempuri.org/ITooBuzyService/DeleteTableResponse")]
+        System.Threading.Tasks.Task<bool> DeleteTableAsync(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -597,11 +1395,11 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
-            base.Channel.CreateConsumer(consumer);
+        public bool CreateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
+            return base.Channel.CreateConsumer(consumer);
         }
         
-        public System.Threading.Tasks.Task CreateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
+        public System.Threading.Tasks.Task<bool> CreateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
             return base.Channel.CreateConsumerAsync(consumer);
         }
         
@@ -621,19 +1419,19 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
             return base.Channel.GetAllAsync();
         }
         
-        public void UpdateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
-            base.Channel.UpdateConsumer(consumer);
+        public bool UpdateConsumer(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
+            return base.Channel.UpdateConsumer(consumer);
         }
         
-        public System.Threading.Tasks.Task UpdateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
+        public System.Threading.Tasks.Task<bool> UpdateConsumerAsync(TooBuzyWebClient.TooBuzyServiceReference.Consumer consumer) {
             return base.Channel.UpdateConsumerAsync(consumer);
         }
         
-        public void DeleteConsumer(int Id) {
-            base.Channel.DeleteConsumer(Id);
+        public bool DeleteConsumer(int Id) {
+            return base.Channel.DeleteConsumer(Id);
         }
         
-        public System.Threading.Tasks.Task DeleteConsumerAsync(int Id) {
+        public System.Threading.Tasks.Task<bool> DeleteConsumerAsync(int Id) {
             return base.Channel.DeleteConsumerAsync(Id);
         }
         
@@ -643,6 +1441,254 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         
         public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Consumer> GetByIntAsync(int phone) {
             return base.Channel.GetByIntAsync(phone);
+        }
+        
+        public bool CreateCustomer(TooBuzyWebClient.TooBuzyServiceReference.Customer customer) {
+            return base.Channel.CreateCustomer(customer);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateCustomerAsync(TooBuzyWebClient.TooBuzyServiceReference.Customer customer) {
+            return base.Channel.CreateCustomerAsync(customer);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Customer GetCustomerById(int Id) {
+            return base.Channel.GetCustomerById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer> GetCustomerByIdAsync(int Id) {
+            return base.Channel.GetCustomerByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Customer GetCustomerByPhone(int phone) {
+            return base.Channel.GetCustomerByPhone(phone);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer> GetCustomerByPhoneAsync(int phone) {
+            return base.Channel.GetCustomerByPhoneAsync(phone);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Customer[] GetAllCustomers() {
+            return base.Channel.GetAllCustomers();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Customer[]> GetAllCustomersAsync() {
+            return base.Channel.GetAllCustomersAsync();
+        }
+        
+        public bool UpdateCustomer(TooBuzyWebClient.TooBuzyServiceReference.Customer customer) {
+            return base.Channel.UpdateCustomer(customer);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateCustomerAsync(TooBuzyWebClient.TooBuzyServiceReference.Customer customer) {
+            return base.Channel.UpdateCustomerAsync(customer);
+        }
+        
+        public bool DeleteCustomer(int Id) {
+            return base.Channel.DeleteCustomer(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteCustomerAsync(int Id) {
+            return base.Channel.DeleteCustomerAsync(Id);
+        }
+        
+        public bool CreateProduct(TooBuzyWebClient.TooBuzyServiceReference.Product product) {
+            return base.Channel.CreateProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateProductAsync(TooBuzyWebClient.TooBuzyServiceReference.Product product) {
+            return base.Channel.CreateProductAsync(product);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Product GetProductById(int Id) {
+            return base.Channel.GetProductById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Product> GetProductByIdAsync(int Id) {
+            return base.Channel.GetProductByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Product[] GetAllProducts() {
+            return base.Channel.GetAllProducts();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Product[]> GetAllProductsAsync() {
+            return base.Channel.GetAllProductsAsync();
+        }
+        
+        public bool UpdateProduct(TooBuzyWebClient.TooBuzyServiceReference.Product product) {
+            return base.Channel.UpdateProduct(product);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateProductAsync(TooBuzyWebClient.TooBuzyServiceReference.Product product) {
+            return base.Channel.UpdateProductAsync(product);
+        }
+        
+        public bool DeleteProduct(int Id) {
+            return base.Channel.DeleteProduct(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteProductAsync(int Id) {
+            return base.Channel.DeleteProductAsync(Id);
+        }
+        
+        public bool CreateBooking(TooBuzyWebClient.TooBuzyServiceReference.Booking booking) {
+            return base.Channel.CreateBooking(booking);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateBookingAsync(TooBuzyWebClient.TooBuzyServiceReference.Booking booking) {
+            return base.Channel.CreateBookingAsync(booking);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Booking GetBookingById(int Id) {
+            return base.Channel.GetBookingById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Booking> GetBookingByIdAsync(int Id) {
+            return base.Channel.GetBookingByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Booking[] GetAllBookings() {
+            return base.Channel.GetAllBookings();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Booking[]> GetAllBookingsAsync() {
+            return base.Channel.GetAllBookingsAsync();
+        }
+        
+        public bool UpdateBooking(TooBuzyWebClient.TooBuzyServiceReference.Booking booking) {
+            return base.Channel.UpdateBooking(booking);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateBookingAsync(TooBuzyWebClient.TooBuzyServiceReference.Booking booking) {
+            return base.Channel.UpdateBookingAsync(booking);
+        }
+        
+        public bool DeleteBooking(int Id) {
+            return base.Channel.DeleteBooking(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteBookingAsync(int Id) {
+            return base.Channel.DeleteBookingAsync(Id);
+        }
+        
+        public bool CreateMenu(TooBuzyWebClient.TooBuzyServiceReference.Menu menu) {
+            return base.Channel.CreateMenu(menu);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateMenuAsync(TooBuzyWebClient.TooBuzyServiceReference.Menu menu) {
+            return base.Channel.CreateMenuAsync(menu);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Menu GetMenuById(int Id) {
+            return base.Channel.GetMenuById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Menu> GetMenuByIdAsync(int Id) {
+            return base.Channel.GetMenuByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Menu[] GetAllMenus() {
+            return base.Channel.GetAllMenus();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Menu[]> GetAllMenusAsync() {
+            return base.Channel.GetAllMenusAsync();
+        }
+        
+        public bool UpdateMenu(TooBuzyWebClient.TooBuzyServiceReference.Menu menu) {
+            return base.Channel.UpdateMenu(menu);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateMenuAsync(TooBuzyWebClient.TooBuzyServiceReference.Menu menu) {
+            return base.Channel.UpdateMenuAsync(menu);
+        }
+        
+        public bool DeleteMenu(int Id) {
+            return base.Channel.DeleteMenu(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteMenuAsync(int Id) {
+            return base.Channel.DeleteMenuAsync(Id);
+        }
+        
+        public bool CreateOrder(TooBuzyWebClient.TooBuzyServiceReference.Order order) {
+            return base.Channel.CreateOrder(order);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateOrderAsync(TooBuzyWebClient.TooBuzyServiceReference.Order order) {
+            return base.Channel.CreateOrderAsync(order);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Order GetOrderById(int Id) {
+            return base.Channel.GetOrderById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Order> GetOrderByIdAsync(int Id) {
+            return base.Channel.GetOrderByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Order[] GetAllOrders() {
+            return base.Channel.GetAllOrders();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Order[]> GetAllOrdersAsync() {
+            return base.Channel.GetAllOrdersAsync();
+        }
+        
+        public bool UpdateOrder(TooBuzyWebClient.TooBuzyServiceReference.Order order) {
+            return base.Channel.UpdateOrder(order);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateOrderAsync(TooBuzyWebClient.TooBuzyServiceReference.Order order) {
+            return base.Channel.UpdateOrderAsync(order);
+        }
+        
+        public bool DeleteOrder(int Id) {
+            return base.Channel.DeleteOrder(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteOrderAsync(int Id) {
+            return base.Channel.DeleteOrderAsync(Id);
+        }
+        
+        public bool CreateTable(TooBuzyWebClient.TooBuzyServiceReference.Table table) {
+            return base.Channel.CreateTable(table);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateTableAsync(TooBuzyWebClient.TooBuzyServiceReference.Table table) {
+            return base.Channel.CreateTableAsync(table);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Table GetTableById(int Id) {
+            return base.Channel.GetTableById(Id);
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Table> GetTableByIdAsync(int Id) {
+            return base.Channel.GetTableByIdAsync(Id);
+        }
+        
+        public TooBuzyWebClient.TooBuzyServiceReference.Table[] GetAllTables() {
+            return base.Channel.GetAllTables();
+        }
+        
+        public System.Threading.Tasks.Task<TooBuzyWebClient.TooBuzyServiceReference.Table[]> GetAllTablesAsync() {
+            return base.Channel.GetAllTablesAsync();
+        }
+        
+        public bool UpdateTable(TooBuzyWebClient.TooBuzyServiceReference.Table table) {
+            return base.Channel.UpdateTable(table);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateTableAsync(TooBuzyWebClient.TooBuzyServiceReference.Table table) {
+            return base.Channel.UpdateTableAsync(table);
+        }
+        
+        public bool DeleteTable(int Id) {
+            return base.Channel.DeleteTable(Id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteTableAsync(int Id) {
+            return base.Channel.DeleteTableAsync(Id);
         }
     }
 }

@@ -39,19 +39,20 @@ namespace TooBuzyDataAccess
 
                         if (fail)
                         {
-                            Console.WriteLine("Customer wasnt created!");
+                            Console.WriteLine("Customer name already exsists!");
                             return false;
                         }
                         else
                         {
                             using (SqlCommand Ccmd = connection.CreateCommand())
                             {
-                                Ccmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Password) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Password)";
+                                Ccmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Createdate, Password) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Createdate, @Password)";
                                 Ccmd.Parameters.AddWithValue("Name", entity.Name);
                                 Ccmd.Parameters.AddWithValue("Type", entity.Type);
                                 Ccmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
                                 Ccmd.Parameters.AddWithValue("Address", entity.Address);
                                 Ccmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                                Ccmd.Parameters.AddWithValue("Createdate", entity.Createdate);
                                 Ccmd.Parameters.AddWithValue("Password", entity.Password);
                             }
                             Console.WriteLine("Customer created");
@@ -110,7 +111,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer";
+                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo, Createdate, MenuId FROM Customer";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -121,6 +122,8 @@ namespace TooBuzyDataAccess
                             cus.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
                             cus.Address = reader.GetString(reader.GetOrdinal("Address"));
                             cus.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            cus.Createdate = reader.GetDateTime(reader.GetOrdinal("Createdate"));
+                            cus.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
                             customers.Add(cus);
                         }
                     }
@@ -148,7 +151,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE Id = @Id";
+                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo, Createdate, MenuId FROM Customer WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", Id);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -159,13 +162,33 @@ namespace TooBuzyDataAccess
                             customer.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
                             customer.Address = reader.GetString(reader.GetOrdinal("Address"));
                             customer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            customer.Createdate = reader.GetDateTime(reader.GetOrdinal("Createdate"));
+                            customer.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
+
+                        }
+                        reader.Close();
+                    }
+                    using (SqlCommand Tcmd = connection.CreateCommand())
+                    {
+                        Tcmd.CommandText = "SELECT Id, TableNo, NoOfSeats, CustomerId FROM [Table] WHERE CustomerId = @CustomerId";
+                        Tcmd.Parameters.AddWithValue("CustomerId", Id);
+                        SqlDataReader reader = Tcmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            customer.Tables.Add(new Table
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                TableNo = reader.GetInt32(reader.GetOrdinal("TableNo")),
+                                NoOfSeats = reader.GetInt32(reader.GetOrdinal("NoOfSeats")),
+                                CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
+                            });
                         }
                     }
                     connection.Close();
                     Console.WriteLine("Returning the Customer with id: " + Id);
                     Console.WriteLine("----------------");
-
                 }
+                scope.Complete();
             }
             return customer;
         }
@@ -185,7 +208,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE PhoneNo = @PhoneNo";
+                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo, MenuId FROM Customer WHERE PhoneNo = @PhoneNo";
                         cmd.Parameters.AddWithValue("@PhoneNo", phone);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -203,6 +226,7 @@ namespace TooBuzyDataAccess
                     Console.WriteLine("----------------");
 
                 }
+                scope.Complete();
             }
             return customer;
         }
@@ -268,7 +292,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Customer SET Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password WHERE Name = @Name";
+                        cmd.CommandText = "UPDATE Customer SET Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password, MenuId = @MenuId WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Type", entity.Type);
@@ -276,6 +300,7 @@ namespace TooBuzyDataAccess
                         cmd.Parameters.AddWithValue("Address", entity.Address);
                         cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
                         cmd.Parameters.AddWithValue("Password", entity.Password);
+                        cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
                         cmd.ExecuteNonQuery();
                     }
                     Console.WriteLine("customer updated");

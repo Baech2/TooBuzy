@@ -12,17 +12,24 @@ namespace TooBuzyBusinessLogic
     public class ProductController : ICRUD<Product>
     {
         private ProductDb _ProductDb = new ProductDb();
-        public void Create(Product entity)
+        public bool Create(Product entity)
         {
+            bool productCreated = false;
             if (entity != null)
             {
-                _ProductDb.Create(entity);
+                productCreated = _ProductDb.Create(entity);
             }
+            return productCreated;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _ProductDb.Delete(Id);
+            bool productDeleted = false;
+            if (Id != 0)
+            {
+                productDeleted = _ProductDb.Delete(Id);
+            }
+            return productDeleted;
         }
 
         public IEnumerable<Product> GetAll()
@@ -40,12 +47,14 @@ namespace TooBuzyBusinessLogic
             throw new NotImplementedException();
         }
 
-        public void Update(Product entity)
+        public bool Update(Product entity)
         {
+            bool productUpdated = false;
             if (entity != null)
             {
-                _ProductDb.Update(entity);
+                productUpdated = _ProductDb.Update(entity);
             }
+            return productUpdated;
         }
     }
 }

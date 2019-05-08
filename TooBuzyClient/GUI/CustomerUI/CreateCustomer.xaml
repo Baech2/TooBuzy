@@ -40,7 +40,8 @@
         <TextBlock Text="Password :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Margin="10"/>
         <TextBox Name="txtPassword" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="6" Margin="10" />
 
-        <Button Content="Login" Grid.Row="7" Margin="10" Padding="5" HorizontalAlignment="Right" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
+        <Button Content="Opret" Grid.Row="7" Margin="10" Padding="5" HorizontalAlignment="Right" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
+        <Button Content="Annuller" Grid.Row="7" Margin="10" HorizontalAlignment="Left" Grid.Column="1" Name="AnnullerBtn" Click="AnnullerBtn_Click"/>
 
     </Grid>
 </Window>

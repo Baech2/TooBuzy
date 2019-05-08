@@ -17,9 +17,7 @@ namespace TooBuzyEntities
         [DataMember]
         public int NoOfSeats { get; set; }
         [DataMember]
-        public Booking Booking { get; set; }
-        [DataMember]
-        public int? BookingId { get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
         [DataMember]
         public Customer Customer { get; set; }
         [DataMember]

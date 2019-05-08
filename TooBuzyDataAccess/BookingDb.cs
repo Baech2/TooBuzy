@@ -29,9 +29,10 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Booking (Date, ConsumerId) VALUES (@Date, @ConsumerId)";
+                        cmd.CommandText = "INSERT INTO Booking (Date, ConsumerId, TableId) VALUES (@Date, @ConsumerId, @TableId)";
                         cmd.Parameters.AddWithValue("Date", entity.Date);
                         cmd.Parameters.AddWithValue("ConsumerId", entity.ConsumerId);
+                        cmd.Parameters.AddWithValue("TableId", entity.TableId);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();
@@ -85,7 +86,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking";
+                        cmd.CommandText = "SELECT Id, Date, ConsumerId, TableId FROM Booking";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -93,6 +94,7 @@ namespace TooBuzyDataAccess
                             booking.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             booking.Date = reader.GetDateTime(reader.GetOrdinal("Date"));
                             booking.ConsumerId = reader.GetInt32(reader.GetOrdinal("ConsumerId"));
+                            booking.TableId = reader.GetInt32(reader.GetOrdinal("TableId"));
                             bookings.Add(booking);
                         }
                     }
@@ -120,13 +122,14 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking";
+                        cmd.CommandText = "SELECT Id, Date, ConsumerId, TableId FROM Booking";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             booking.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             booking.Date = reader.GetDateTime(reader.GetOrdinal("Date"));
                             booking.ConsumerId = reader.GetInt32(reader.GetOrdinal("ConsumerId"));
+                            booking.TableId = reader.GetInt32(reader.GetOrdinal("TableId"));
                         }
                     }
                     connection.Close();
@@ -152,9 +155,10 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Consumer SET Date = @Date, ConsumerId = @ConsumerId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE Consumer SET Date = @Date, ConsumerId = @ConsumerId, TableId = @TableId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("Date", entity.Date);
                         cmd.Parameters.AddWithValue("ConsumerId", entity.ConsumerId);
+                        cmd.Parameters.AddWithValue("TableId", entity.TableId);
                         cmd.ExecuteNonQuery();
                     }
                     connection.Close();

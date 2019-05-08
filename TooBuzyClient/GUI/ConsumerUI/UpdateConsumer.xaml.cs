@@ -50,7 +50,13 @@ namespace TooBuzyClient.GUI.ConsumerUI
             finally
             {
                 client.Close();
+                Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -53,7 +53,13 @@ namespace TooBuzyClient.GUI.ConsumerUI
             finally
             {
                 proxy.Close();
+                Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
         }
     }
 }

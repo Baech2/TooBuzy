@@ -13,6 +13,7 @@ namespace TooBuzyEntities
         public Order()
         {
             OrderLines = new List<OrderLine>();
+            Createdate = DateTime.Now;
         }
         [DataMember]
         public int Id { get; set; }
@@ -24,6 +25,9 @@ namespace TooBuzyEntities
         public int BookingId { get; set; }
         [DataMember]
         public Booking Booking{ get; set; }
+        [DataMember]
+        public DateTime Createdate { get; set; }
+
         [DataMember]
         public List<OrderLine> OrderLines { get; set; }
     }

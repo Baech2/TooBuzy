@@ -5,30 +5,193 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TooBuzyClient"
         mc:Ignorable="d"
-        Title="Consumer CRUD" Height="485.184" Width="535.579">
-    <Grid Margin="0,0,18,-8">
+        Title="TooBuzy MainWindow" Height="650" Width="900">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="153*"/>
-            <RowDefinition Height="166*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="InsertConsumer" Content="Create Consumer" HorizontalAlignment="Left" Margin="60,177,0,0" VerticalAlignment="Top" Width="99"  Click="InsertConsumer_Click" Height="24"/>
-        <Button x:Name="getAll" Content="getAll&#xD;&#xA;" HorizontalAlignment="Left" Margin="371,195,0,0" VerticalAlignment="Top" Width="91" Click="getAll_Click" Height="24"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="49,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtPhoneNo" HorizontalAlignment="Left" Height="23" Margin="49,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="49,4,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPhoneNo" Content="Phone Number: " HorizontalAlignment="Left" Margin="49,53,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="listBConsumers" HorizontalAlignment="Left" Height="160" Margin="371,30,0,0" VerticalAlignment="Top" Width="136" Grid.RowSpan="2"/>
-        <Label x:Name="lblConsumers" Content="Consumers" HorizontalAlignment="Left" Margin="371,4,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtPhoneNo_Copy" HorizontalAlignment="Left" Height="23" Margin="217,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblPhoneNo_Copy" Content="Phone Number" HorizontalAlignment="Left" Margin="217,57,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnFindConsumer" Content="Find Consumer&#xA;by PhoneNo" HorizontalAlignment="Left" Margin="217,126,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumer_Click" Height="37" Grid.RowSpan="2"/>
-        <TextBox x:Name="txtGetById" HorizontalAlignment="Left" Height="23" Margin="49,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <Label x:Name="lblGetById" Content="Find Consumer by Id" HorizontalAlignment="Left" Margin="49,16,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button x:Name="btnFindConsumerById" Content="Find Consumer&#xA;by Id" HorizontalAlignment="Left" Margin="49,70,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumerById_Click" Height="37" Grid.Row="1"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="49,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblPasssword" Content="Password:" HorizontalAlignment="Left" Margin="49,102,0,0" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Button Name="OpenNewWindow" Content="Open Create Consumer" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1" Margin="284,0,0,136" Click="OpenNewWindow_Click"/>
-        <Button Name="OpenUpdateConsumer" Content="Open Update Consumer" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1" Margin="284,0,0,161" Click="OpenNewWindow_Click"/>
+        <!--Grid row 0-->
+        <TextBlock Text="Consumer CRUD" FontSize="15" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 0-->
+        <Button Content="Create Consumer" Grid.Row="1" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateConsumerBtn" Click="CreateConsumerBtn_Click"/>
+        <!--Grid row 2 & column 0-->
+        <Button Content="Update Consumer" Grid.Row="2" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateConsumerBtn" Click="UpdateConsumerBtn_Click"/>
+        <!--Grid row 3 & column 0-->
+        <Button Content="Delete Consumer" Grid.Row="3" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteConsumerBtn" Click="DeleteConsumerBtn_Click"/>
+        <!--Grid row 4 & column 0-->
+        <TextBlock Text="Find Consumer by id:" Grid.Row="4" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 0-->
+        <TextBox Name="txtFindConsumerById"  Grid.Row="5" Width="65" />
+        <!--Grid row 6 & column 0-->
+        <Button Name="GetConsumerByIdBtn" Content="Get Consumer" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="GetConsumerByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 7 & column 0-->
+        <TextBlock Text="Consumer by phone:" Grid.Row="7" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 8 & column 0-->
+        <TextBox Name="txtFindConsumerByPhone"  Grid.Row="8" Width="100" />
+        <!--Grid row 9 & column 0-->
+        <Button Name="GetConsumerByPhoneBtn" Content="Get Consumer" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="GetConsumerByPhoneBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 0-->
+        <TextBlock Text="Find all Consumers" Grid.Row="10" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 0-->
+        <ListBox Name="listBConsumers" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11"/>
+        <!--Grid row 12 & column 0-->
+        <Button Name="getAll" Content="Get All Consumers" Grid.Row="12" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAll_Click" Margin="10" Height="24"/>
+
+
+        <!--Grid row 0 & column 1-->
+        <TextBlock Text="Customer CRUD" FontSize="15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 1-->
+        <Button Content="Create Customer" Grid.Row="1" Grid.Column="1" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
+        <!--Grid row 2 & column 1-->
+        <Button Content="Update Customer" Grid.Row="2" Grid.Column="1" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateCustomerBtn" Click="UpdateCustomerBtn_Click"/>
+        <!--Grid row 3 & column 1-->
+        <Button Content="Delete Customer" Grid.Row="3" Grid.Column="1" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteCustomerBtn" Click="DeleteCustomerBtn_Click"/>
+        <!--Grid row 4 & column 1-->
+        <TextBlock Text="Find Customer by id:" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 1-->
+        <TextBox Name="txtFindCustyomerById" Height="25"  Grid.Row="5" Grid.Column="1" Width="65" />
+        <!--Grid row 6 & column 1-->
+        <Button Name="FindCustomerByIdBtn" Content="Get Customer" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindCustomerByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 7 & column 1-->
+        <TextBlock Text="Customer by phone:" Grid.Row="7" Width="110" Grid.Column="1" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 8 & column 1-->
+        <TextBox Name="txtFindCustomerByPhone"  Grid.Row="8" Grid.Column="1" Width="100" />
+        <!--Grid row 9 & column 1-->
+        <Button Name="FindCustomerByPhoneBtn" Content="Get Customer" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindCustomerByPhoneBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 1-->
+        <TextBlock Text="Find all Customers" Grid.Row="10" Grid.Column="1" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 1-->
+        <ListBox Name="listBCustomers" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="1"/>
+        <!--Grid row 12 & column 1-->
+        <Button Name="getAllCustomers" Content="Get All Customers" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllCustomers_Click" Margin="10" Height="24"/>
+
+
+        <!--Grid row 0 & column 2-->
+        <TextBlock Text="Order CRUD" FontSize="15" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 2-->
+        <Button Content="Create Order" Grid.Row="1" Grid.Column="2" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateOrderBtn" Click="CreateOrderBtn_Click"/>
+        <!--Grid row 2 & column 2-->
+        <Button Content="Update Order" Grid.Row="2" Grid.Column="2" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateOrderBtn" Click="UpdateOrderBtn_Click"/>
+        <!--Grid row 3 & column 2-->
+        <Button Content="Delete Order" Grid.Row="3" Grid.Column="2" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteOrderBtn" Click="DeleteOrderBtn_Click"/>
+        <!--Grid row 4 & column 2-->
+        <TextBlock Text="Find Order by id:" Grid.Row="4" Grid.Column="2" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 2-->
+        <TextBox Name="txtFindOrderById" Height="25"  Grid.Row="5" Grid.Column="2" Width="65" />
+        <!--Grid row 6 & column 2-->
+        <Button Name="FindOrderByIdBtn" Content="Get Orders" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindOrderByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 2-->
+        <TextBlock Text="Find all Orders" Grid.Row="10" Grid.Column="2" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 2-->
+        <ListBox Name="listBOrders" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="2"/>
+        <!--Grid row 12 & column 2-->
+        <Button Name="getAllOrders" Content="Get All Orders" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllOrders_Click" Margin="10" Height="24"/>
+
+
+        <!--Grid row 0 & column 3-->
+        <TextBlock Text="Product CRUD" FontSize="15" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 3-->
+        <Button Content="Create Product" Grid.Row="1" Grid.Column="3" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateProductBtn" Click="CreateProductBtn_Click"/>
+        <!--Grid row 2 & column 3-->
+        <Button Content="Update Product" Grid.Row="2" Grid.Column="3" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateProductBtn" Click="UpdateProductBtn_Click"/>
+        <!--Grid row 3 & column 3-->
+        <Button Content="Delete Product" Grid.Row="3" Grid.Column="3" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteProductBtn" Click="DeleteProductBtn_Click"/>
+        <!--Grid row 4 & column 3-->
+        <TextBlock Text="Find Product by id:" Grid.Row="4" Grid.Column="3" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 3-->
+        <TextBox Name="txtFindProductById" Height="25"  Grid.Row="5" Grid.Column="3" Width="65" />
+        <!--Grid row 6 & column 3-->
+        <Button Name="FindProductByIdBtn" Content="Get Product" Grid.Row="6" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindProductByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 3-->
+        <TextBlock Text="Find all Products" Grid.Row="10" Grid.Column="3" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 3-->
+        <ListBox Name="listBProduct" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="3"/>
+        <!--Grid row 12 & column 3-->
+        <Button Name="getAllProducts" Content="Get All Products" Grid.Row="12" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllProducts_Click" Margin="10" Height="24"/>
+
+        <!--Grid row 0 & column 4-->
+        <TextBlock Text="Menu CRUD" FontSize="15" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 4-->
+        <Button Content="Create Menu" Grid.Row="1" Grid.Column="4" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateMenuBtn" Click="CreateMenuBtn_Click"/>
+        <!--Grid row 2 & column 4-->
+        <Button Content="Update Menu" Grid.Row="2" Grid.Column="4" Padding="3"  Margin="23,0,23,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Name="UpdateMenuBtn" Click="UpdateMenuBtn_Click"/>
+        <!--Grid row 3 & column 4-->
+        <Button Content="Delete Menu" Grid.Row="3" Grid.Column="4" Padding="3"  Margin="26,0,25,6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Name="DeleteMenutBtn" Click="DeleteMenutBtn_Click"/>
+        <!--Grid row 4 & column 4-->
+        <TextBlock Text="Find Menu by id:" Grid.Row="4" Grid.Column="4" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 4-->
+        <TextBox Name="txtFindMenuById" Height="25"  Grid.Row="5" Grid.Column="4" Width="65" />
+        <!--Grid row 6 & column 4-->
+        <Button Name="FindMenuByIdBtn" Content="Get Menu" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindMenuByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 4-->
+        <TextBlock Text="Find all Menus" Grid.Row="10" Grid.Column="4" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 4-->
+        <ListBox Name="listBMenu" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="4"/>
+        <!--Grid row 12 & column 4-->
+        <Button Name="getAllMenus" Content="Get All Menus" Grid.Row="12" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllMenus_Click" Margin="10" Height="24"/>
+
+        <!--Grid row 0 & column 5-->
+        <TextBlock Text="Table CRUD" FontSize="15" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 5-->
+        <Button Content="Create Table" Grid.Row="1" Grid.Column="5" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateTableBtn" Click="CreateTableBtn_Click"/>
+        <!--Grid row 2 & column 5-->
+        <Button Content="Update Table" Grid.Row="2" Grid.Column="5" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateTableBtn" Click="UpdateTableBtn_Click"/>
+        <!--Grid row 3 & column 5-->
+        <Button Content="Delete Table" Grid.Row="3" Grid.Column="5" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteTableBtn" Click="DeleteTableBtn_Click"/>
+        <!--Grid row 4 & column 5-->
+        <TextBlock Text="Find Menu by id:" Grid.Row="4" Grid.Column="5" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 5-->
+        <TextBox Name="txtFindTableById" Height="25"  Grid.Row="5" Grid.Column="5" Width="65" />
+        <!--Grid row 6 & column 5-->
+        <Button Name="FindTableByIdBtn" Content="Get Table" Grid.Row="6" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindTableByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 5-->
+        <TextBlock Text="Find all Table" Grid.Row="10" Grid.Column="5" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 5-->
+        <ListBox Name="listBTable" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="5"/>
+        <!--Grid row 12 & column 5-->
+        <Button Name="getAllTable" Content="Get All Tables" Grid.Row="12" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllTables_Click" Margin="10" Height="24"/>
+
+        <!--Grid row 0 & column 6-->
+        <TextBlock Text="Booking CRUD" FontSize="15" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" Margin="5" />
+        <!--Grid row 1 & column 6-->
+        <Button Content="Create Booking" Grid.Row="1" Grid.Column="6" Padding="3" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="CreateBookingBtn" Click="CreateBookingBtn_Click"/>
+        <!--Grid row 2 & column 6-->
+        <Button Content="Update Booking" Grid.Row="2" Grid.Column="6" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="UpdateBookingBtn" Click="UpdateBookingBtn_Click"/>
+        <!--Grid row 3 & column 6-->
+        <Button Content="Delete Booking" Grid.Row="3" Grid.Column="6" Padding="3"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Name="DeleteBookingBtn" Click="DeleteBookingBtn_Click"/>
+        <!--Grid row 4 & column 6-->
+        <TextBlock Text="Find Booking by id:" Grid.Row="4" Grid.Column="6" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 5 & column 6-->
+        <TextBox Name="txtFindBookingById" Height="25"  Grid.Row="5" Grid.Column="6" Width="65" />
+        <!--Grid row 6 & column 6-->
+        <Button Name="FindBookingByIdBtn" Content="Get Booking" Grid.Row="6" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="FindBookingByIdBtn_Click" Margin="10" Height="24"/>
+        <!--Grid row 10 & column 6-->
+        <TextBlock Text="Find all Bookings" Grid.Row="10" Grid.Column="6" Margin="5" HorizontalAlignment="Center" />
+        <!--Grid row 11 & column 6-->
+        <ListBox Name="listBBooking" HorizontalAlignment="Center" Height="160" VerticalAlignment="Center" Width="100" Grid.Row="11" Grid.Column="6"/>
+        <!--Grid row 12 & column 6-->
+        <Button Name="getAllBooking" Content="Get All Booking" Grid.Row="12" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="getAllBookings_Click" Margin="10" Height="24"/>
     </Grid>
 </Window>

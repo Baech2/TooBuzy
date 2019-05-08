@@ -25,14 +25,13 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Creating Table:" + entity.BookingId + " " + entity.CustomerId + " " + entity.TableNo);
+                    Console.WriteLine("Creating Table:" + " " + entity.CustomerId + " " + entity.TableNo);
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Table (TableNo, NoOfSeats, BookingId, CustomerId) VALUES (@TableNo, @NoOfSeats, @BookingId, @CustomerId)";
+                        cmd.CommandText = "INSERT INTO [Table] (TableNo, NoOfSeats, BookingId, CustomerId) VALUES (@TableNo, @NoOfSeats, @BookingId, @CustomerId)";
                         cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
                         cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
-                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
                         cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                         cmd.ExecuteNonQuery();
                     }
@@ -89,7 +88,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM Consumer";
+                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, CustomerId FROM [Table]";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -97,7 +96,6 @@ namespace TooBuzyDataAccess
                             table.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             table.TableNo = reader.GetInt32(reader.GetOrdinal("TableNo"));
                             table.NoOfSeats = reader.GetInt32(reader.GetOrdinal("NoOfSeats"));
-                            table.BookingId = reader.GetInt32(reader.GetOrdinal("BookingId"));
                             table.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                             tables.Add(table);
                         }
@@ -126,14 +124,13 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM Consumer";
+                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM [Table]";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             table.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             table.TableNo = reader.GetInt32(reader.GetOrdinal("TableNo"));
                             table.NoOfSeats = reader.GetInt32(reader.GetOrdinal("NoOfSeats"));
-                            table.BookingId = reader.GetInt32(reader.GetOrdinal("BookingId"));
                             table.CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
                         }
                     }
@@ -155,14 +152,13 @@ namespace TooBuzyDataAccess
                 {
                     connection.Open();
                     Console.WriteLine("----------------");
-                    Console.WriteLine("Updatting Table:" + entity.TableNo + entity.BookingId);
+                    Console.WriteLine("Updatting Table:" + entity.TableNo );
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Table SET TableNo = @TableNo, NoOfSeats = @NoOfSeats, BookingId = @BookingId, CustomerId = @CustomerId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE [Table] SET TableNo = @TableNo, NoOfSeats = @NoOfSeats, BookingId = @BookingId, CustomerId = @CustomerId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
                         cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
-                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
                         cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
                     }
                     connection.Close();

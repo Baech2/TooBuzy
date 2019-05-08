@@ -19,7 +19,7 @@ namespace TooBuzyEntities
         [DataMember]
         public string ProductName { get; set; }
         [DataMember]
-        public string Desciption { get; set; }
+        public string Description { get; set; }
         [DataMember]
         public decimal Price { get; set; }
         [DataMember]

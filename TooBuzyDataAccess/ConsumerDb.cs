@@ -59,10 +59,11 @@ namespace TooBuzyDataAccess
                             {
                                 using (SqlCommand bkcmd = connection.CreateCommand())
                                 {
-                                    bkcmd.CommandText = "SELECET Id, Date, ConsumerId FROM Consumer WHERE ConsumerId = @ConsumerId";
+                                    bkcmd.CommandText = "SELECET Id, Date, ConsumerId, TableId FROM Consumer WHERE ConsumerId = @ConsumerId";
                                     bkcmd.Parameters.AddWithValue("Id", bk.Id);
                                     bkcmd.Parameters.AddWithValue("Date", bk.Date);
                                     bkcmd.Parameters.AddWithValue("ConsumerId", insertedId);
+                                    bkcmd.Parameters.AddWithValue("TableId", bk.TableId);
                                     bkcmd.ExecuteNonQuery();
                                 }
                             }
@@ -177,12 +178,12 @@ namespace TooBuzyDataAccess
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                                    ConsumerId = Id
+                                    TableId = reader.GetInt32(reader.GetOrdinal("TableId"))
                                 });
                         }
                     }
                     connection.Close();
-                    Console.WriteLine("Returning the Consumer with id: " + Id + consumer.Bookings.ToList().FirstOrDefault());
+                    Console.WriteLine("Returning the Consumer with id: " + Id + consumer.Bookings.ToList().Count());
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();
@@ -192,7 +193,53 @@ namespace TooBuzyDataAccess
 
         public Consumer GetByInt(int phone)
         {
-            throw new NotImplementedException();
+            Consumer consumer = new Consumer();
+            TransactionOptions options = new TransactionOptions();
+            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("----------------");
+                    Console.WriteLine("Getting all Customers");
+
+                    using (SqlCommand cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE PhoneNo = @PhoneNo";
+                        cmd.Parameters.AddWithValue("@PhoneNo", phone);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            consumer.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            consumer.Name = reader.GetString(reader.GetOrdinal("Name"));
+                            consumer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            consumer.Password = reader.GetString(reader.GetOrdinal("Password"));
+                        }
+                        reader.Close();
+                    }
+                    using (SqlCommand bCmd = connection.CreateCommand())
+                    {
+                        bCmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking WHERE ConsumerId = @ConsumerId";
+                        bCmd.Parameters.AddWithValue("ConsumerId", consumer.Id);
+                        SqlDataReader reader = bCmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            consumer.Bookings.Add(new Booking
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Date = reader.GetDateTime(reader.GetOrdinal("Date"))
+                            });
+                        }
+                        reader.Close();
+                    }
+                    connection.Close();
+                    Console.WriteLine("Returning the Customer with id: " + phone);
+                    Console.WriteLine("----------------");
+                }
+                scope.Complete();
+            }
+            return consumer;
         }
 
         public bool Login(string Name, string Password)

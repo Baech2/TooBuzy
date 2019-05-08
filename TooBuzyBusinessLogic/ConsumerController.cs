@@ -10,7 +10,7 @@ using TooBuzyEntities;
 
 namespace TooBuzyBusinessLogic
 {
-    public class ConsumerController  /*ICRUD<Consumer>*/
+    public class ConsumerController : ICRUD<Consumer>
     {
         private ConsumerDb _ConsumerDb = new ConsumerDb();
         public bool Create(Consumer entity)
@@ -23,12 +23,14 @@ namespace TooBuzyBusinessLogic
             return tt;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
+            bool cdeleted = false;
             if (Id != 0)
             {
-                _ConsumerDb.Delete(Id);
+               cdeleted = _ConsumerDb.Delete(Id);
             }
+            return cdeleted;
         }
 
         public IEnumerable<Consumer> GetAll()
@@ -50,7 +52,7 @@ namespace TooBuzyBusinessLogic
 
         public Consumer GetByInt(int phone)
         {
-            if (phone.ToString().Length >= 8)
+            if (phone.ToString().Length == 8)
             {
                 return _ConsumerDb.GetByInt(phone);
             }

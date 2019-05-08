@@ -30,10 +30,11 @@ namespace TooBuzyDataAccess
                     int insertedId;
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO [Order] (TotalPrice, Date, BookingId) OUTPUT INSERTED.ID VALUES (@TotalPrice, @Date, @BookingId)";
+                        cmd.CommandText = "INSERT INTO [Order] (TotalPrice, Date, Createdate BookingId) OUTPUT INSERTED.ID VALUES (@TotalPrice, @Date, @Createdate, @BookingId)";
                         cmd.Parameters.AddWithValue("TotalPrice", entity.TotalPrice);
                         cmd.Parameters.AddWithValue("Date", entity.Date);
-                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId); 
+                        cmd.Parameters.AddWithValue("Createdate", entity.Createdate);
+                        cmd.Parameters.AddWithValue("BookingId", entity.BookingId);
                         insertedId = (int)cmd.ExecuteScalar();
                     }
                     foreach (OrderLine ol in entity.OrderLines)
@@ -163,6 +164,25 @@ namespace TooBuzyDataAccess
                             order.Date = reader.GetDateTime(reader.GetOrdinal("Date"));
                             order.BookingId = reader.GetInt32(reader.GetOrdinal("BookingId"));
                         }
+                        reader.Close();
+                    }
+                    using (SqlCommand olCmd = connection.CreateCommand())
+                    {
+                        olCmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId, ProductId FROM OrderLine WHERE OrderId = @OrderId";
+                        olCmd.Parameters.AddWithValue("OrderId", Id);
+                        SqlDataReader reader = olCmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            order.OrderLines.Add(
+                                new OrderLine
+                                { 
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                                    SubTotal = reader.GetDecimal(reader.GetOrdinal("SubTotal")),
+                                    ProductId = reader.GetInt32(reader.GetOrdinal("ProductId"))
+                                });
+                        }
+                        reader.Close();
                     }
                     connection.Close();
                     Console.WriteLine("Returning the Orders with id: " + Id);
@@ -202,6 +222,6 @@ namespace TooBuzyDataAccess
             }
             return true;
         }
-        
+
     }
 }

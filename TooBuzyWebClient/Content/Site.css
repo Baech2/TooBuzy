@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #f6f6f4;
+    font-family: 'bebasregular';
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +23,303 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.allProducts p{
+    color:black;
+}
+.mylogin {
+    background-color: #4a4a4a!important;
+    border-radius: 15px;
+    border-color: #4a4a4a;
+    height: 30px;
+}
+
+.mtop {
+    margin-top: 10px;
+}
+
+.mtop15 {
+    margin-top: 15px;
+}
+
+nav ul li {
+    display: inline;
+    list-style-type: none;
+}
+
+    nav ul li a {
+        color: #fff;
+    }
+
+.navbar {
+    background-color: #2d2d2d;
+}
+
+.loginButton {
+    background-color: #ea6a53!important;
+    border-radius: 10px;
+    border-color: #ea6a53;
+    margin-top:4px;
+    margin-left:10px;
+}
+
+.siteNav {
+    background-color: #c3c3c3;
+    font-size: 32px;
+    border-radius: 3px;
+}
+
+    .siteNav ul {
+        padding: 0;
+    }
+
+        .siteNav ul li {
+            padding-right: 10px;
+        }
+
+            .siteNav ul li:hover {
+                background-color: #2d2d2d;
+            }
+
+            .siteNav ul li a:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+    .siteNav input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 15px 12px 30px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+.myform {
+    width: 100px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.p0 {
+    padding: 0;
+}
+
+.pRight {
+    padding-right: 0;
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+footer {
+    margin-top:120px;
+    background-color: #2d2d2d;
+    bottom: 0;
+}
+
+#footerNav ul {
+    padding-left: 0;
+}
+
+#footerNav a, p {
+    color: #949494;
+}
+
+.adverBox {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.productImg {
+    height: 200px;
+    width: 180px;
+}
+
+.productBox {
+    height: 250px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    .productBox a {
+        color: red;
+    }
+
+
+.imageContainer {
+    background-image: url('Images/Ekstra/detailsTop.jpg');
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0;
+    margin-top: -10px;
+}
+
+    .imageContainer h2 {
+        padding: 10px 0 0 20px;
+    }
+
+.productDetails {
+    margin-top: 50px;
+}
+
+/*product Details tabs*/
+
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+    border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+    display: block;
+    background-color: #fff;
+    min-height: 50px;
+}
+
+.tabs-below > .nav-tabs {
+    border-top: 1px solid #ddd;
+}
+
+    .tabs-below > .nav-tabs > li {
+        margin-top: -1px;
+        margin-bottom: 0;
+    }
+
+        .tabs-below > .nav-tabs > li > a {
+            -webkit-border-radius: 0 0 4px 4px;
+            -moz-border-radius: 0 0 4px 4px;
+            border-radius: 0 0 4px 4px;
+        }
+
+            .tabs-below > .nav-tabs > li > a:hover,
+            .tabs-below > .nav-tabs > li > a:focus {
+                border-top-color: #ddd;
+                border-bottom-color: transparent;
+            }
+
+    .tabs-below > .nav-tabs > .active > a,
+    .tabs-below > .nav-tabs > .active > a:hover,
+    .tabs-below > .nav-tabs > .active > a:focus {
+        border-color: transparent #ddd #ddd #ddd;
+    }
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+    float: none;
+}
+
+    .tabs-left > .nav-tabs > li > a,
+    .tabs-right > .nav-tabs > li > a {
+        min-width: 74px;
+        margin-right: 0;
+        margin-bottom: 3px;
+    }
+
+.tabs-left > .nav-tabs {
+    float: left;
+    margin-right: 19px;
+    border-right: 1px solid #ddd;
+}
+
+    .tabs-left > .nav-tabs > li > a {
+        margin-right: -1px;
+        -webkit-border-radius: 4px 0 0 4px;
+        -moz-border-radius: 4px 0 0 4px;
+        border-radius: 4px 0 0 4px;
+    }
+
+        .tabs-left > .nav-tabs > li > a:hover,
+        .tabs-left > .nav-tabs > li > a:focus {
+            border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+        }
+
+    .tabs-left > .nav-tabs .active > a,
+    .tabs-left > .nav-tabs .active > a:hover,
+    .tabs-left > .nav-tabs .active > a:focus {
+        border-color: #ddd transparent #ddd #ddd;
+        *border-right-color: #ffffff;
+    }
+
+.tabs-right > .nav-tabs {
+    float: right;
+    margin-left: 19px;
+    border-left: 1px solid #ddd;
+}
+
+    .tabs-right > .nav-tabs > li > a {
+        margin-left: -1px;
+        -webkit-border-radius: 0 4px 4px 0;
+        -moz-border-radius: 0 4px 4px 0;
+        border-radius: 0 4px 4px 0;
+    }
+
+        .tabs-right > .nav-tabs > li > a:hover,
+        .tabs-right > .nav-tabs > li > a:focus {
+            border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+        }
+
+    .tabs-right > .nav-tabs .active > a,
+    .tabs-right > .nav-tabs .active > a:hover,
+    .tabs-right > .nav-tabs .active > a:focus {
+        border-color: #ddd #ddd #ddd transparent;
+        *border-left-color: #ffffff;
+    }
+
+.tab-content {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.tabbable ul {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.tab-pane {
+    padding-left: 10px;
+    padding-top: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Info {
+    background-color: #fff;
+    margin-top: 20px;
+    padding-left: 30px;
+}
+
+.mtopCustom {
+    margin-top: 50px;
+}
+
+.form-horizontal input {
+    background-color: #ebebeb;
+    border:0;
+}
+
+.form-horizontal textarea {
+    background-color: #ebebeb;
+    border:0;
+}
+
+.formHolder{
+    background-color:#fff;
 }

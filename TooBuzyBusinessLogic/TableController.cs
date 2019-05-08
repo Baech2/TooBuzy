@@ -12,17 +12,24 @@ namespace TooBuzyBusinessLogic
     public class TableController : ICRUD<Table>
     {
         private TableDb _TableDb = new TableDb();
-        public void Create(Table entity)
+        public bool Create(Table entity)
         {
+            bool tableCreated = false;
             if (entity != null)
             {
-                _TableDb.Create(entity);
+                tableCreated = _TableDb.Create(entity);
             }
+            return tableCreated;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _TableDb.Delete(Id);
+            bool tableDelted = false;
+            if (Id != 0)
+            {
+                tableDelted =_TableDb.Delete(Id);
+            }
+            return tableDelted;
         }
 
         public IEnumerable<Table> GetAll()
@@ -35,17 +42,14 @@ namespace TooBuzyBusinessLogic
             return _TableDb.GetById(Id);
         }
 
-        public Table GetByInt(int phone)
+        public bool Update(Table entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Table entity)
-        {
+            bool tableUpdated = false;
             if (entity != null)
             {
-                _TableDb.Update(entity);
+                tableUpdated = _TableDb.Update(entity);
             }
+            return tableUpdated;
         }
     }
 }

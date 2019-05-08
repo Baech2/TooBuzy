@@ -8,11 +8,10 @@ namespace TooBuzyBusinessLogic.Interfaces
 {
     interface ICRUD<T>
     {
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(int Id);
+        bool Create(T entity);
+        bool Update(T entity);
+        bool Delete(int Id);
         T GetById(int Id);
         IEnumerable<T> GetAll();
-        T GetByInt(int phone);
     }
 }

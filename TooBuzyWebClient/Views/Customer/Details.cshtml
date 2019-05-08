@@ -1,0 +1,16 @@
+﻿@model TooBuzyWebClient.TooBuzyServiceReference.Customer
+@{
+    ViewBag.Title = Model.Name + " detaljer";
+}
+
+    <div class="jumbotron">
+        <h1>@Model.Name</h1>
+        <p class="lead">Vores type mad: @Model.Type</p>
+        <i>Adresse: @Model.Address - @Model.ZipCode</i>
+        <i>Antal borde: @Model.Tables.Count()</i>
+        <a href="@Url.Action("Create", "Booking")" class="btn btn-success pull-right">Create booking</a>
+
+    </div>
+<div class="row">
+    @Html.Action("_MenuPartial", "Customer", new { Id = Model.MenuId })
+</div>

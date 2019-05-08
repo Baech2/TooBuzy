@@ -12,7 +12,7 @@ namespace TooBuzyEntities
     {
         public Booking()
         {
-            Tables = new List<Table>();
+            
         }
         [DataMember]
         public int Id { get; set; }
@@ -23,6 +23,8 @@ namespace TooBuzyEntities
         [DataMember]
         public Consumer Consumer { get; set; }
         [DataMember]
-        public List<Table> Tables { get; set; }
+        public int TableId { get; set; }
+        [DataMember]
+        public Table Table { get; set; }
     }
 }

@@ -1,0 +1,34 @@
+﻿<Window x:Class="TooBuzyClient.GUI.test.CopyOfMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TooBuzyClient.GUI.test"
+        mc:Ignorable="d"
+        Title="Lidt af det hele til consumer" Height="450" Width="800">
+    <Grid Margin="0,0,18,-8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="153*"/>
+            <RowDefinition Height="166*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="InsertConsumer" Content="Create Consumer" HorizontalAlignment="Left" Margin="60,177,0,0" VerticalAlignment="Top" Width="99"  Click="InsertConsumer_Click" Height="24"/>
+        <Button x:Name="getAll" Content="getAll&#xD;&#xA;" HorizontalAlignment="Left" Margin="371,195,0,0" VerticalAlignment="Top" Width="91" Click="getAll_Click" Height="24"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="49,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPhoneNo" HorizontalAlignment="Left" Height="23" Margin="49,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="49,4,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPhoneNo" Content="Phone Number: " HorizontalAlignment="Left" Margin="49,53,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBConsumers" HorizontalAlignment="Left" Height="160" Margin="371,30,0,0" VerticalAlignment="Top" Width="136" Grid.RowSpan="2"/>
+        <Label x:Name="lblConsumers" Content="Consumers" HorizontalAlignment="Left" Margin="371,4,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPhoneNo_Copy" HorizontalAlignment="Left" Height="23" Margin="217,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPhoneNo_Copy" Content="Phone Number" HorizontalAlignment="Left" Margin="217,57,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnFindConsumer" Content="Find Consumer&#xA;by PhoneNo" HorizontalAlignment="Left" Margin="217,126,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumer_Click" Height="37" Grid.RowSpan="2"/>
+        <TextBox x:Name="txtGetById" HorizontalAlignment="Left" Height="23" Margin="49,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <Label x:Name="lblGetById" Content="Find Consumer by Id" HorizontalAlignment="Left" Margin="49,16,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button x:Name="btnFindConsumerById" Content="Find Consumer&#xA;by Id" HorizontalAlignment="Left" Margin="49,70,0,0" VerticalAlignment="Top" Width="120" Click="btnFindConsumerById_Click" Height="37" Grid.Row="1"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="49,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPasssword" Content="Password:" HorizontalAlignment="Left" Margin="49,102,0,0" VerticalAlignment="Top"/>
+
+        <Button Name="OpenNewWindow" Content="Open Create Consumer" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1" Margin="284,0,0,136" Click="OpenNewWindow_Click"/>
+        <Button Name="OpenUpdateConsumer" Content="Open Update Consumer" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1" Margin="284,0,0,161" Click="OpenNewWindow_Click"/>
+    </Grid>
+</Window>

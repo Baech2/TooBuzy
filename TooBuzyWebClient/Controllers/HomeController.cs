@@ -8,21 +8,24 @@ namespace TooBuzyWebClient.Controllers
 {
     public class HomeController : Controller
     {
+       private TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+
         public ActionResult Index()
         {
-            return View();
+            
+            return View(proxy.GetAllCustomers().ToList());
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Om os beskrivelse";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kontakt side";
 
             return View();
         }

@@ -12,17 +12,24 @@ namespace TooBuzyBusinessLogic
     public class CustomerContoller : ICRUD<Customer>
     {
         private CustomerDb _CustomerDb = new CustomerDb();
-        public void Create(Customer entity)
+        public bool Create(Customer entity)
         {
+            bool customerCreated = false;
             if (entity != null)
             {
-                _CustomerDb.Create(entity);
+                customerCreated = _CustomerDb.Create(entity);
             }
+            return customerCreated;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _CustomerDb.Delete(Id);
+            bool customerDelted = false;
+            if (Id <= 0 )
+            {
+                customerDelted = _CustomerDb.Delete(Id);
+            }
+            return customerDelted;
         }
 
         public IEnumerable<Customer> GetAll()
@@ -40,12 +47,14 @@ namespace TooBuzyBusinessLogic
             throw new NotImplementedException();
         }
 
-        public void Update(Customer entity)
+        public bool Update(Customer entity)
         {
+            bool customerUpdated = false;
             if (entity != null)
             {
-                _CustomerDb.Update(entity);
+                customerUpdated = _CustomerDb.Update(entity);
             }
+            return customerUpdated;
         }
     }
 }

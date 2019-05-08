@@ -12,17 +12,24 @@ namespace TooBuzyBusinessLogic
     public class BookingController : ICRUD<Booking>
     {
         private BookingDb _BookingDb = new BookingDb();
-        public void Create(Booking entity)
+        public bool Create(Booking entity)
         {
+            bool tt = false;
             if (entity != null)
             {
-                _BookingDb.Create(entity);
+                tt = _BookingDb.Create(entity);
             }
+            return tt;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _BookingDb.Delete(Id);
+            bool bookingDeleted = false;
+            if (Id != 0)
+            {
+                bookingDeleted = _BookingDb.Delete(Id);
+            }
+            return bookingDeleted;
         }
 
         public IEnumerable<Booking> GetAll()
@@ -35,17 +42,14 @@ namespace TooBuzyBusinessLogic
             return _BookingDb.GetById(Id);
         }
 
-        public Booking GetByInt(int phone)
+        public bool Update(Booking entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Booking entity)
-        {
+            bool bookingUpdated = false;
             if (entity != null)
             {
-                _BookingDb.Update(entity);
+                bookingUpdated = _BookingDb.Update(entity);
             }
+            return bookingUpdated;
         }
     }
 }

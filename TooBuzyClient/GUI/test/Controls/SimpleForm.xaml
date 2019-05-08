@@ -28,7 +28,7 @@
             <RadioButton Name="Male" GroupName="Sex" Content="Male" IsChecked="True" Margin="5" />
             <RadioButton Name="Female" GroupName="Sex" Content="Female"  Margin="5" />
         </StackPanel>
-        <TextBlock Text="Dp you own" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
+        <TextBlock Text="Do you own" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <CheckBox Name="Desktop" Content="Desktop" Margin="5"/>
             <CheckBox Name="Laptop" Content="Laptop" Margin="5"/>

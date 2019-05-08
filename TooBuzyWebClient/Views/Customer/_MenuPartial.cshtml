@@ -1,0 +1,46 @@
+﻿@model TooBuzyWebClient.TooBuzyServiceReference.Menu
+@{ 
+    Layout = "";
+}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <p>Produkt Navn:</p>
+                </th>
+                <th>
+                    <p>Beskrivelse:</p>
+                </th>
+                <th>
+                    <p>Pris:</p>
+                </th>
+                <th>
+                    Tilføj  
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Products)
+        {
+            if (item.IsDeleted != true)
+            {
+                <tr>
+                    <th>
+                        <p>@item.ProductName</p>
+                    </th>
+                    <th>
+                        <p>@item.Description </p>
+                    </th>
+                    <th>
+                        <p>@item.Price</p>
+                    </th>
+                    <th>
+                        @*Skal tilføjes et order event*@
+                        <button type="button" class="btn btn-success">Tilføj</button>
+                    </th>
+                </tr>
+            }
+
+        }
+        <tbody></tbody>
+    </table>

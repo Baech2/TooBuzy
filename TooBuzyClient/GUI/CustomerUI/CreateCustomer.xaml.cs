@@ -38,7 +38,7 @@ namespace TooBuzyClient.GUI.CustomerUI
                     if (int.TryParse(txtPhoneNo.Text, out parsedPhoneNo) && int.TryParse(txtZipCode.Text, out parsedZip))
                     {
                         Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text };
-                        //await proxy.CreateCustomerAsync(newCustomer); 
+                        await proxy.CreateCustomerAsync(newCustomer); 
                         //Confirmation
                     }
                 }
@@ -52,6 +52,11 @@ namespace TooBuzyClient.GUI.CustomerUI
             {
                 proxy.Close();
             }
+        }
+
+        private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
         }
     }
 }

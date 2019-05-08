@@ -12,17 +12,25 @@ namespace TooBuzyBusinessLogic
     public class MenuController : ICRUD<Menu>
     {
         private MenuDb _MenuDb = new MenuDb();
-        public void Create(Menu entity)
+
+        public bool Create(Menu entity)
         {
+            bool menuCreated = false;
             if (entity != null)
             {
-                _MenuDb.Create(entity);
+                menuCreated = _MenuDb.Create(entity);
             }
+            return menuCreated;
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            _MenuDb.Delete(Id);
+            bool menuDelted = false;
+            if (Id != 0)
+            {
+                menuDelted = _MenuDb.Delete(Id);
+            }
+            return menuDelted;
         }
 
         public IEnumerable<Menu> GetAll()
@@ -35,17 +43,14 @@ namespace TooBuzyBusinessLogic
             return _MenuDb.GetById(Id);
         }
 
-        public Menu GetByInt(int phone)
+        public bool Update(Menu entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Menu entity)
-        {
+            bool menuUpdated = false;
             if (entity != null)
             {
-                _MenuDb.Update(entity);
+                menuUpdated = _MenuDb.Update(entity);
             }
+            return menuUpdated;
         }
     }
 }
