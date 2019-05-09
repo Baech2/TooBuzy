@@ -1,0 +1,47 @@
+﻿<Window x:Class="TooBuzyClient.GUI.BookingUI.CreateBooking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TooBuzyClient.GUI.BookingUI"
+        mc:Ignorable="d"
+        Title="Opret booking" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Calendar SelectionMode="SingleRange"  
+        Name="MonthlyCalendar"  
+        SelectedDatesChanged="MonthlyCalendar_SelectedDatesChanged"  
+         DisplayDateChanged="MonthlyCalendar_DisplayDateChanged"  
+         DisplayModeChanged="MonthlyCalendar_DisplayModeChanged"  
+         HorizontalAlignment="Left"  
+        VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
+
+
+        <TextBlock Text="Dato: " HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="20" Margin="5" Grid.Row="2"/>
+        <!--<Calendar Name="DeliveryDate" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Left"/>-->
+        <TextBox Grid.Row="2" Grid.Column="1" Width="250" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5" x:Name="SelectedDateTextBox">
+        </TextBox>
+
+        <TextBlock Text="Forbruger Id: " HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" FontSize="20" Grid.Row="3"/>
+        <TextBox Name="txtConsumerId" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="250" Grid.Column="1" Margin="5" Grid.Row="3"/>
+
+        <TextBlock Text="Bord Id: " HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" FontSize="20" Grid.Row="4"/>
+        <TextBox Name="txtTableId" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="250" Grid.Column="1" Margin="5" Grid.Row="4"/>
+
+        <Button Content="Opret Booking" Grid.Row="5" Margin="5" HorizontalAlignment="Right" Name="CreateBookingBtn" Click="CreateBookingBtn_Click"/>
+        <Button Content="Annuller" Grid.Row="5" Margin="5" HorizontalAlignment="Left" Grid.Column="1" Name="AnnullerBtn" Click="AnnullerBtn_Click"/>
+
+    </Grid>
+</Window>

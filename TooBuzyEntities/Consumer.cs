@@ -26,7 +26,7 @@ namespace TooBuzyEntities
         public string Password { get; set; }
         public override string ToString()
         {
-            return this.Name + "(" + PhoneNo + ")";
+            return "("+this.Id+")" + this.Name + "," + PhoneNo;
         }
     }
 }

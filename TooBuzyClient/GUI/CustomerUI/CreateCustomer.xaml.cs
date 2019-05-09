@@ -38,8 +38,9 @@ namespace TooBuzyClient.GUI.CustomerUI
                     if (int.TryParse(txtPhoneNo.Text, out parsedPhoneNo) && int.TryParse(txtZipCode.Text, out parsedZip))
                     {
                         Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text };
-                        await proxy.CreateCustomerAsync(newCustomer); 
-                        //Confirmation
+                        await proxy.CreateCustomerAsync(newCustomer);
+                        MessageBox.Show("Kunden er blevet oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                 }
             }
@@ -51,6 +52,7 @@ namespace TooBuzyClient.GUI.CustomerUI
             finally
             {
                 proxy.Close();
+                Visibility = Visibility.Collapsed;
             }
         }
 

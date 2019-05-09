@@ -22,5 +22,10 @@ namespace TooBuzyEntities
         public Customer Customer { get; set; }
         [DataMember]
         public int CustomerId { get; set; }
+
+        public override string ToString()
+        {
+            return "(" + this.Id + ") TableNumber:" + this.TableNo + "(Seats:"+this.NoOfSeats +")";
+        }
     }
 }

@@ -27,8 +27,12 @@ namespace TooBuzyEntities
         public Booking Booking{ get; set; }
         [DataMember]
         public DateTime Createdate { get; set; }
-
         [DataMember]
         public List<OrderLine> OrderLines { get; set; }
+
+        public override string ToString()
+        {
+            return "(" + this.Id + ")" +this.TotalPrice +"("+this.BookingId+")";
+        }
     }
 }

@@ -57,8 +57,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\BookingUI\CreateBooking.xaml.cs">
+      <DependentUpon>CreateBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\BookingUI\DeleteBooking.xaml.cs">
+      <DependentUpon>DeleteBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\BookingUI\UpdateBooking.xaml.cs">
+      <DependentUpon>UpdateBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ConsumerUI\CreateConsumer.xaml.cs">
       <DependentUpon>CreateConsumer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConsumerUI\DeleteConsumer.xaml.cs">
+      <DependentUpon>DeleteConsumer.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\ConsumerUI\LoginConsumer.xaml.cs">
       <DependentUpon>LoginConsumer.xaml</DependentUpon>
@@ -69,11 +81,41 @@
     <Compile Include="GUI\CustomerUI\CreateCustomer.xaml.cs">
       <DependentUpon>CreateCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CustomerUI\DeleteCustomer.xaml.cs">
+      <DependentUpon>DeleteCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\CustomerUI\LoginCustomer.xaml.cs">
       <DependentUpon>LoginCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\CustomerUI\UpdateCustomer.xaml.cs">
       <DependentUpon>UpdateCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuUI\CreateMenu.xaml.cs">
+      <DependentUpon>CreateMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuUI\DeleteMenu.xaml.cs">
+      <DependentUpon>DeleteMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuUI\UpdateMenu.xaml.cs">
+      <DependentUpon>UpdateMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ProductUI\CreateProduct.xaml.cs">
+      <DependentUpon>CreateProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ProductUI\DeleteProduct.xaml.cs">
+      <DependentUpon>DeleteProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ProductUI\UpdateProduct.xaml.cs">
+      <DependentUpon>UpdateProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TableUI\CreateTable.xaml.cs">
+      <DependentUpon>CreateTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TableUI\DeleteTable.xaml.cs">
+      <DependentUpon>DeleteTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\TableUI\UpdateTable.xaml.cs">
+      <DependentUpon>UpdateTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\test\Controls\SimpleForm.xaml.cs">
       <DependentUpon>SimpleForm.xaml</DependentUpon>
@@ -101,7 +143,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="GUI\BookingUI\CreateBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\BookingUI\DeleteBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\BookingUI\UpdateBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\ConsumerUI\CreateConsumer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ConsumerUI\DeleteConsumer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,11 +175,51 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\CustomerUI\DeleteCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\CustomerUI\LoginCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\CustomerUI\UpdateCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\MenuUI\CreateMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\MenuUI\DeleteMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\MenuUI\UpdateMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ProductUI\CreateProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ProductUI\DeleteProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ProductUI\UpdateProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\TableUI\CreateTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\TableUI\DeleteTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\TableUI\UpdateTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

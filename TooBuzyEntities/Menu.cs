@@ -23,5 +23,10 @@ namespace TooBuzyEntities
         public string Description { get; set; }
         [DataMember]
         public List<Product> Products { get; set; }
+
+        public override string ToString()
+        {
+            return "("+this.Id+")" + this.Category + ", Products: " + this.Products.ToList().Count();
+        }
     }
 }

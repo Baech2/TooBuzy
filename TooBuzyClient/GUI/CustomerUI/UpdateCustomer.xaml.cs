@@ -38,8 +38,9 @@ namespace TooBuzyClient.GUI.CustomerUI
                     if (int.TryParse(txtPhoneNo.Text, out parsedPhoneNo) && int.TryParse(txtZipCode.Text,out parsedZip))
                     {
                         Customer updateCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text };
-                        //await proxy.UpdateCustomerAsync(updateCustomer);
-                        //Metodes mangler i service contract. fix!
+                        await proxy.UpdateCustomerAsync(updateCustomer);
+                        MessageBox.Show("Kunden er blevet opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                 }
             }
@@ -50,7 +51,13 @@ namespace TooBuzyClient.GUI.CustomerUI
             finally
             {
                 proxy.Close();
+                Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -37,5 +37,10 @@ namespace TooBuzyEntities
         public int MenuId { get; set; }
         [DataMember]
         public Menu menu { get; set; }
+
+        public override string ToString()
+        {
+            return "("+this.Id+")" + this.Name + ","+ this.Address +"," + this.ZipCode;
+        }
     }
 }

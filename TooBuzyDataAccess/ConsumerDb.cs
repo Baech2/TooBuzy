@@ -19,7 +19,7 @@ namespace TooBuzyDataAccess
         public bool Create(Consumer entity)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -81,7 +81,7 @@ namespace TooBuzyDataAccess
         public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -109,7 +109,7 @@ namespace TooBuzyDataAccess
         {
             List<Consumer> consumers = new List<Consumer>();
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -145,7 +145,7 @@ namespace TooBuzyDataAccess
         {
             Consumer consumer = new Consumer();
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -168,7 +168,7 @@ namespace TooBuzyDataAccess
                     }
                     using (SqlCommand BCmd = connection.CreateCommand())
                     {
-                        BCmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking WHERE ConsumerId = @ConsumerId";
+                        BCmd.CommandText = "SELECT Id, Date, ConsumerId, TableId FROM Booking WHERE ConsumerId = @ConsumerId";
                         BCmd.Parameters.AddWithValue("ConsumerId", Id);
                         SqlDataReader reader = BCmd.ExecuteReader();
                         while (reader.Read())
@@ -178,12 +178,12 @@ namespace TooBuzyDataAccess
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                                    TableId = reader.GetInt32(reader.GetOrdinal("TableId"))
+                                    TableId = reader.GetInt32(reader.GetOrdinal("TableId")),
                                 });
                         }
                     }
                     connection.Close();
-                    Console.WriteLine("Returning the Consumer with id: " + Id + consumer.Bookings.ToList().Count());
+                    Console.WriteLine("Returning the Consumer with id: " + Id);
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();
@@ -195,7 +195,7 @@ namespace TooBuzyDataAccess
         {
             Consumer consumer = new Consumer();
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -206,8 +206,8 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE PhoneNo = @PhoneNo";
-                        cmd.Parameters.AddWithValue("@PhoneNo", phone);
+                        cmd.CommandText = "SELECT Id, Name, PhoneNo, Password FROM Consumer WHERE PhoneNo = @PhoneNo";
+                        cmd.Parameters.AddWithValue("PhoneNo", phone);
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -220,7 +220,7 @@ namespace TooBuzyDataAccess
                     }
                     using (SqlCommand bCmd = connection.CreateCommand())
                     {
-                        bCmd.CommandText = "SELECT Id, Date, ConsumerId FROM Booking WHERE ConsumerId = @ConsumerId";
+                        bCmd.CommandText = "SELECT Id, Date, ConsumerId, TableId FROM Booking WHERE ConsumerId = @ConsumerId";
                         bCmd.Parameters.AddWithValue("ConsumerId", consumer.Id);
                         SqlDataReader reader = bCmd.ExecuteReader();
                         while (reader.Read())
@@ -228,13 +228,14 @@ namespace TooBuzyDataAccess
                             consumer.Bookings.Add(new Booking
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Date = reader.GetDateTime(reader.GetOrdinal("Date"))
+                                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                                TableId = reader.GetInt32(reader.GetOrdinal("TableId"))
                             });
                         }
                         reader.Close();
                     }
                     connection.Close();
-                    Console.WriteLine("Returning the Customer with id: " + phone);
+                    Console.WriteLine("Returning the Customer with phone number: " + phone);
                     Console.WriteLine("----------------");
                 }
                 scope.Complete();
@@ -250,7 +251,7 @@ namespace TooBuzyDataAccess
         public bool Update(Consumer entity)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))

@@ -34,5 +34,10 @@ namespace TooBuzyEntities
         public Menu Menu { get; set; }
         [DataMember]
         public List<OrderLine> Orderlines { get; set; }
+
+        public override string ToString()
+        {
+            return "("+this.Id+")"+ this.ProductName + "(" +this.Price+ ")";
+        }
     }
 }

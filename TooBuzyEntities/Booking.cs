@@ -26,5 +26,10 @@ namespace TooBuzyEntities
         public int TableId { get; set; }
         [DataMember]
         public Table Table { get; set; }
+
+        public override string ToString()
+        {
+            return "(" + this.Id + ") ConsumerId:" + this.ConsumerId + ", TableId: " + this.TableId +", Time:"+this.Date.Hour+":"+this.Date.Minute+", Date: "+this.Date.Day+"/"+this.Date.Month;
+        }
     }
 }

@@ -1,0 +1,30 @@
+﻿<Window x:Class="TooBuzyClient.GUI.ConsumerUI.DeleteConsumer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TooBuzyClient.GUI.ConsumerUI"
+        mc:Ignorable="d"
+        Title="Slet forbruger" Height="450" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Forbruger Id :" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Margin="10" />
+        <TextBox Name="txtConsumerId" Width="110" Height="35" Margin="10" FontSize="20" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Button Name="GetConsumerByIdBtn" Content="Find brugeren med det indsatte id? " Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="203" Click="GetConsumerByIdBtn_Click" Margin="10,10,0,0" Height="24"/>
+        <Button Name="DeleteConsumerByIdBtn" Content="Slet forbruger" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="160" Click="DeleteConsumerByIdBtn_Click" Margin="10" Height="24"/>
+
+        <Button Content="Annuller" Grid.Row="7" Margin="5" Height="35" HorizontalAlignment="center" Grid.Column="1" Name="AnnullerBtn" Click="AnnullerBtn_Click"/>
+
+    </Grid>
+</Window>

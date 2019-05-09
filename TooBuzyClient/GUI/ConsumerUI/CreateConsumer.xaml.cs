@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TooBuzyEntities;
+using TooBuzyClient;
 
 namespace TooBuzyClient.GUI.ConsumerUI
 {
@@ -38,7 +39,6 @@ namespace TooBuzyClient.GUI.ConsumerUI
                         Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = txtPassword.Text };
 
                         await proxy.CreateConsumerAsync(newConsumer);
-
                         MessageBox.Show("Bruger er blevet oprettet", "Bruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
