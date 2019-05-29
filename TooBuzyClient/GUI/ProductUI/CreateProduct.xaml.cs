@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TooBuzyEntities;
 
 namespace TooBuzyClient.GUI.ProductUI
 {
@@ -26,12 +27,37 @@ namespace TooBuzyClient.GUI.ProductUI
 
         private void CreateProductBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
 
+            try
+            {
+                if (!string.IsNullOrEmpty(txtProductName.Text) && !string.IsNullOrEmpty(txtDescription.Text) && !string.IsNullOrEmpty(txtPrice.Text) && !string.IsNullOrEmpty(txtStock.Text) && !string.IsNullOrEmpty(txtMenuId.Text))
+                {
+                    if (decimal.TryParse(txtPrice.Text, out decimal parsedPrice) && int.TryParse(txtStock.Text, out int parsedStock) && int.TryParse(txtMenuId.Text, out int parsedMenuId))
+                    {
+                        Product newProduct = new Product { Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, ImageUrl = txtImageUrl.Text, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
+
+                        proxy.CreateProduct(newProduct);
+                        MessageBox.Show("Productet er blevet oprettet", "Product oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+                Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Visibility = Visibility.Collapsed;
         }
     }
+
 }

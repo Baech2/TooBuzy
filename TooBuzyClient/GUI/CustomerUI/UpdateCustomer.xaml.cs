@@ -25,20 +25,18 @@ namespace TooBuzyClient.GUI.CustomerUI
             InitializeComponent();
         }
 
-        private async void UpdateCustomerBtn_Click(object sender, RoutedEventArgs e)
+        private void UpdateCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
 
             try
             {
-                int parsedPhoneNo;
-                int parsedZip;
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtType.Text) && !string.IsNullOrEmpty(txtZipCode.Text) && !string.IsNullOrEmpty(txtAddress.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    if (int.TryParse(txtPhoneNo.Text, out parsedPhoneNo) && int.TryParse(txtZipCode.Text,out parsedZip))
+                    if (int.TryParse(txtPhoneNo.Text, out int parsedPhoneNo) && int.TryParse(txtZipCode.Text,out int parsedZip) && int.TryParse(txtMenuId.Text, out int parsedMenuId))
                     {
-                        Customer updateCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text };
-                        await proxy.UpdateCustomerAsync(updateCustomer);
+                        Customer updateCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text, MenuId = parsedMenuId };
+                        proxy.UpdateCustomer(updateCustomer);
                         MessageBox.Show("Kunden er blevet opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }

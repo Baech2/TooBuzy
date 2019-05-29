@@ -25,7 +25,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
             InitializeComponent();
         }
 
-        private async void UpdateConsumerBtn_Click(object sender, RoutedEventArgs e)
+        private void UpdateConsumerBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient client = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
@@ -37,7 +37,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
                     if (int.TryParse(txtPhoneNo.Text, out PhoneNoUpdate))
                     {
                         Consumer UpdateConsumer = new Consumer {Name = txtName.Text, PhoneNo = PhoneNoUpdate, Password = txtPassword.Text };
-                        await client.UpdateConsumerAsync(UpdateConsumer);
+                        client.UpdateConsumer(UpdateConsumer);
                         MessageBox.Show("Bruger er blevet opdateret", "Bruger opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }

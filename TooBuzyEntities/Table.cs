@@ -10,6 +10,10 @@ namespace TooBuzyEntities
     [DataContract]
     public class Table
     {
+        public Table()
+        {
+            Bookings = new List<Booking>();
+        }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -25,7 +29,7 @@ namespace TooBuzyEntities
 
         public override string ToString()
         {
-            return "(" + this.Id + ") TableNumber:" + this.TableNo + "(Seats:"+this.NoOfSeats +")";
+            return "(" + this.Id + ") BordNr: "+ this.TableNo + "(Pladser:"+this.NoOfSeats +")";
         }
     }
 }

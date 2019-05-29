@@ -18,7 +18,7 @@ namespace TooBuzyDataAccess
         public bool Create(Customer entity)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -46,7 +46,7 @@ namespace TooBuzyDataAccess
                         {
                             using (SqlCommand Ccmd = connection.CreateCommand())
                             {
-                                Ccmd.CommandText = "INSERT INFO Customer (Name, Type, ZipCode, Address, PhoneNo, Createdate, Password) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Createdate, @Password)";
+                                Ccmd.CommandText = "INSERT INTO Customer (Name, Type, ZipCode, Address, PhoneNo, Createdate, Password, MenuId) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Createdate, @Password, @MenuId)";
                                 Ccmd.Parameters.AddWithValue("Name", entity.Name);
                                 Ccmd.Parameters.AddWithValue("Type", entity.Type);
                                 Ccmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
@@ -54,6 +54,8 @@ namespace TooBuzyDataAccess
                                 Ccmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
                                 Ccmd.Parameters.AddWithValue("Createdate", entity.Createdate);
                                 Ccmd.Parameters.AddWithValue("Password", entity.Password);
+                                Ccmd.Parameters.AddWithValue("MenuId", entity.MenuId);
+                                Ccmd.ExecuteNonQuery();
                             }
                             Console.WriteLine("Customer created");
                             Console.WriteLine("----------------");
@@ -69,7 +71,7 @@ namespace TooBuzyDataAccess
         public bool Delete(int Id)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -100,7 +102,7 @@ namespace TooBuzyDataAccess
             List<Customer> customers = new List<Customer>();
 
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -140,7 +142,7 @@ namespace TooBuzyDataAccess
         {
             Customer customer = new Customer();
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -197,7 +199,7 @@ namespace TooBuzyDataAccess
         {
             Customer customer = new Customer();
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -233,55 +235,55 @@ namespace TooBuzyDataAccess
 
         public bool Login(string Name, string Password)
         {
-            //TransactionOptions options = new TransactionOptions();
-            //options.IsolationLevel = IsolationLevel.ReadUncommitted;
-            //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
-            //{
-            //    using (SqlConnection connection = new SqlConnection(_connectionString))
-            //    {
-            //        connection.Open();
-            //        Console.WriteLine("------------");
-            //        Console.WriteLine("Attempting to login a Customer");
+            TransactionOptions options = new TransactionOptions();
+            options.IsolationLevel = IsolationLevel.ReadUncommitted;
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("------------");
+                    Console.WriteLine("Attempting to login a Customer");
 
-            //        using (SqlCommand cmd = connection.CreateCommand())
-            //        {
-            //            cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE Name = @Name AND Password = @Password";
-            //            cmd.Parameters.AddWithValue("Name", Name);
-            //            cmd.Parameters.AddWithValue("Password", Password);
+                    using (SqlCommand cmd = connection.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT Id, Name, Type, ZipCode, Address, PhoneNo FROM Customer WHERE Name = @Name AND Password = @Password";
+                        cmd.Parameters.AddWithValue("Name", Name);
+                        cmd.Parameters.AddWithValue("Password", Password);
 
-            //            System.Data.DataSet ds = new System.Data.DataSet();
-            //            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //            da.Fill(ds);
+                        System.Data.DataSet ds = new System.Data.DataSet();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(ds);
 
-            //            bool Success = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
+                        bool Success = ((ds.Tables.Count > 0) && (ds.Tables[0].Rows.Count > 0));
 
-            //            if (Success)
-            //            {
-            //                //skal håndteres anderledes. Gerne med meddelelse
-            //                Console.WriteLine("Customer Login Succeded! " + Name);
-            //                connection.Close();
-            //                scope.Complete();
+                        if (Success)
+                        {
+                            //skal håndteres anderledes. Gerne med meddelelse
+                            Console.WriteLine("Customer Login Succeded! " + Name);
+                            connection.Close();
+                            scope.Complete();
 
-            //            }
-            //            else
-            //            {
-            //                //Denne exception skal håndres anderledes. Gerne i UI
-            //                connection.Close();
-            //                scope.Complete();
-            //                return false;
-            //            }
-            //        }
+                        }
+                        else
+                        {
+                            //Denne exception skal håndres anderledes. Gerne i UI
+                            connection.Close();
+                            scope.Complete();
+                            return false;
+                        }
+                    }
 
-            //    }
+                }
 
-            //}
+            }
             return true;
         }
 
         public bool Update(Customer entity)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))

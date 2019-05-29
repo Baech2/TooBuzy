@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TooBuzyEntities;
 
 namespace TooBuzyClient.GUI.BookingUI
 {
@@ -26,12 +27,38 @@ namespace TooBuzyClient.GUI.BookingUI
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Visibility = Visibility.Collapsed;
         }
 
         private void CreateBookingBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtConsumerId.Text) && !string.IsNullOrEmpty(txtTableId.Text) && !string.IsNullOrEmpty(SelectedDateTextBox.Text))
+                {
+                    
+                    if (int.TryParse(txtConsumerId.Text, out int ParsedConsumerId) && int.TryParse(txtTableId.Text, out int ParsedTableId))
+                    {
+                        Booking newBooking = new Booking { TableId = ParsedTableId, ConsumerId = ParsedConsumerId, Date = MonthlyCalendar.SelectedDate.Value };
 
+                        proxy.CreateBooking(newBooking);
+                        MessageBox.Show("Bruger er blevet oprettet", "Bruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+                Visibility = Visibility.Collapsed;
+            }
         }
         private void MonthlyCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {

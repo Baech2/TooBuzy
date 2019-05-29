@@ -17,6 +17,7 @@ using TooBuzyClient.GUI.ConsumerUI;
 using TooBuzyClient.GUI.CustomerUI;
 using TooBuzyClient.GUI.MenuUI;
 using TooBuzyClient.GUI.ProductUI;
+using TooBuzyClient.GUI.TableUI;
 using TooBuzyEntities;
 using Menu = TooBuzyEntities.Menu;
 using Table = TooBuzyEntities.Table;
@@ -57,7 +58,7 @@ namespace TooBuzyClient
             var newDeleteConsumerWindow = new DeleteConsumer();
             newDeleteConsumerWindow.ShowDialog();
         }
-        private async void GetConsumerByIdBtn_Click(object sender, RoutedEventArgs e)
+        private void GetConsumerByIdBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
@@ -67,7 +68,7 @@ namespace TooBuzyClient
                     int ParsedId;
                     if (int.TryParse(txtFindConsumerById.Text, out ParsedId))
                     {
-                        Consumer consumer = await proxy.GetConsumerByIdAsync(ParsedId);
+                        Consumer consumer = proxy.GetConsumerById(ParsedId);
 
                         MessageBox.Show(consumer.Name);
                     }
@@ -166,17 +167,17 @@ namespace TooBuzyClient
             var newDeleteCustomerWindow = new DeleteCustomer();
             newDeleteCustomerWindow.ShowDialog();
         }
-        private async void FindCustomerByIdBtn_Click(object sender, RoutedEventArgs e)
+        private void FindCustomerByIdBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
             {
-                if (!string.IsNullOrEmpty(txtFindConsumerById.Text))
+                if (!string.IsNullOrEmpty(txtFindCustyomerById.Text))
                 {
                     int ParsedId;
-                    if (int.TryParse(txtFindConsumerById.Text, out ParsedId))
+                    if (int.TryParse(txtFindCustyomerById.Text, out ParsedId))
                     {
-                        Customer customer= await proxy.GetCustomerByIdAsync(ParsedId);
+                        Customer customer= proxy.GetCustomerById(ParsedId);
 
                         MessageBox.Show(customer.Name);
                     }
@@ -195,7 +196,29 @@ namespace TooBuzyClient
         }
         private void FindCustomerByPhoneBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtFindConsumerByPhone.Text))
+                {
+                    if (int.TryParse(txtFindConsumerByPhone.Text, out int ParsedPhoneNo))
+                    {
+                        Customer customer = proxy.GetCustomerByPhone(ParsedPhoneNo);
+                        MessageBox.Show("Name:" + customer.Name + "   &     PhoneNumber:" + customer.PhoneNo.ToString());
 
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
         public async void updateCustomersListBox()
         {
@@ -238,8 +261,8 @@ namespace TooBuzyClient
         #region
         private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var newCreateOrderWindow = new CreateOrder();
-            //newCreateOrderWindow.ShowDialog();
+            //var newcreateorderwindow = new createorder();
+            //newcreateorderwindow.showdialog();
         }
         private void UpdateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -311,7 +334,30 @@ namespace TooBuzyClient
         }
         private void FindProductByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtFindProductById.Text))
+                {
+                    int ParsedId;
+                    if (int.TryParse(txtFindProductById.Text, out ParsedId))
+                    {
+                        Product product = proxy.GetProductById(ParsedId);
 
+                        MessageBox.Show(product.Name);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
         public async void updateProductListBox()
         {
@@ -369,7 +415,30 @@ namespace TooBuzyClient
         }
         private void FindMenuByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtFindProductById.Text))
+                {
+                    int ParsedId;
+                    if (int.TryParse(txtFindMenuById.Text, out ParsedId))
+                    {
+                        Menu menu = proxy.GetMenuById(ParsedId);
 
+                        MessageBox.Show(menu.Name);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
         public async void updateMenuListBox()
         {
@@ -413,25 +482,48 @@ namespace TooBuzyClient
         #region
         private void CreateTableBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var newCreateTableWindow = new CreateTable();
-            //newCreateTableWindow.ShowDialog();
+            var newCreateTableWindow = new CreateTable();
+            newCreateTableWindow.ShowDialog();
         }
 
         private void UpdateTableBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var newUpdateTableWindow = new UpdateTable();
-            //newUpdateTableWindow.ShowDialog();
+            var newUpdateTableWindow = new UpdateTable();
+            newUpdateTableWindow.ShowDialog();
         }
 
         private void DeleteTableBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var newDeleteTableWindow = new DeleteTable();
-            //newDeleteTableWindow.ShowDialog();
+            var newDeleteTableWindow = new DeleteTable();
+            newDeleteTableWindow.ShowDialog();
         }
 
         private void FindTableByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtFindTableById.Text))
+                {
+                    int ParsedId;
+                    if (int.TryParse(txtFindTableById.Text, out ParsedId))
+                    {
+                        Table table = proxy.GetTableById(ParsedId);
 
+                        MessageBox.Show(table.Id.ToString() + " " + table.TableNo.ToString());
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
 
         public async void updateTableListBox()
@@ -495,7 +587,29 @@ namespace TooBuzyClient
 
         private void FindBookingByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtFindTableById.Text))
+                {
+                    if (int.TryParse(txtFindTableById.Text, out int ParsedId))
+                    {
+                        Booking booking = proxy.GetBookingById(ParsedId);
 
+                        MessageBox.Show(booking.Id.ToString() + " " + booking.TableId.ToString());
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
 
         public async void updateBookingListBox()
@@ -537,9 +651,5 @@ namespace TooBuzyClient
         }
         #endregion
 
-        private void TxtFindConsumerById_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

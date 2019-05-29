@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Table = TooBuzyEntities.Table;
+
 
 namespace TooBuzyClient.GUI.TableUI
 {
@@ -26,12 +28,36 @@ namespace TooBuzyClient.GUI.TableUI
 
         private void UpdateTableBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
 
+            try
+            {
+                if (!string.IsNullOrEmpty(txtNoOfSeats.Text) && !string.IsNullOrEmpty(txtTableNo.Text) && !string.IsNullOrEmpty(txtCustomerId.Text) && !string.IsNullOrEmpty(txtTableId.Text))
+                {
+                    if (int.TryParse(txtNoOfSeats.Text, out int parsedNoOfSeats) && int.TryParse(txtTableNo.Text, out int parsedTableNo) && int.TryParse(txtCustomerId.Text, out int parsedCustomerId) && int.TryParse(txtTableId.Text, out int ParsedTableId))
+                    {
+                        Table updateTable = new Table { NoOfSeats = parsedNoOfSeats, TableNo = parsedTableNo, CustomerId = parsedCustomerId, Id = ParsedTableId };
+
+                        proxy.UpdateTable(updateTable);
+                        MessageBox.Show("Bordet er blevet opdateret", "Bord opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+                Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Visibility = Visibility.Collapsed;
         }
     }
 }

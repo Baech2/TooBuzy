@@ -18,6 +18,8 @@ namespace TooBuzyEntities
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public string Name { get; set; }
+        [DataMember]
         public string Category { get; set; }
         [DataMember]
         public string Description { get; set; }
