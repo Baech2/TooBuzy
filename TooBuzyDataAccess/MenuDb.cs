@@ -29,7 +29,8 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO Menu (Category, Description, CustomerId) VALUES (@Category, @Description, @CustomerId)";
+                        cmd.CommandText = "INSERT INTO Menu (Name, Category, Description) VALUES (@Name, @Category, @Description)";
+                        cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Category", entity.Category);
                         cmd.Parameters.AddWithValue("Description", entity.Description);
                         cmd.ExecuteNonQuery();
@@ -86,12 +87,13 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
+                        cmd.CommandText = "SELECT Id, Name,  Category, Description FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             Menu menu = new Menu();
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            menu.Name = reader.GetString(reader.GetOrdinal("Name"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
                             menus.Add(menu);
@@ -123,11 +125,12 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, Category, Description FROM Menu";
+                        cmd.CommandText = "SELECT Id, Name, Category, Description FROM Menu";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             menu.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            menu.Name = reader.GetString(reader.GetOrdinal("Name"));
                             menu.Category = reader.GetString(reader.GetOrdinal("Category"));
                             menu.Description = reader.GetString(reader.GetOrdinal("Description"));
                         }
@@ -135,7 +138,7 @@ namespace TooBuzyDataAccess
                     }
                     using (SqlCommand Mcmd = connection.CreateCommand())
                     {
-                        Mcmd.CommandText = "SELECT Id, ProductName, Description, Price, ImageUrl, IsDeleted, MenuId FROM Product WHERE MenuId = @MenuId ";
+                        Mcmd.CommandText = "SELECT Id, Name, Description, Price, ImageUrl, IsDeleted, MenuId FROM Product WHERE MenuId = @MenuId ";
                         Mcmd.Parameters.AddWithValue("MenuId", Id);
                         SqlDataReader reader = Mcmd.ExecuteReader();
                         while (reader.Read())
@@ -143,7 +146,7 @@ namespace TooBuzyDataAccess
                             menu.Products.Add(new Product
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
                                 Description = reader.GetString(reader.GetOrdinal("Description")),
                                 Price = reader.GetDecimal(reader.GetOrdinal("Price")),
                                 ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),

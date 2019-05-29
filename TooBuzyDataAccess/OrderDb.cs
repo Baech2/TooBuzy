@@ -196,7 +196,7 @@ namespace TooBuzyDataAccess
         public bool Update(Order entity)
         {
             TransactionOptions options = new TransactionOptions();
-            options.IsolationLevel = IsolationLevel.ReadCommitted;
+            options.IsolationLevel = IsolationLevel.RepeatableRead;
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, options))
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))

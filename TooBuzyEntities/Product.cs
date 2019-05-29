@@ -13,11 +13,12 @@ namespace TooBuzyEntities
         public Product()
         {
             Orderlines = new List<OrderLine>();
+            IsDeleted = false;
         }
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
         [DataMember]
         public string Description { get; set; }
         [DataMember]
@@ -37,7 +38,7 @@ namespace TooBuzyEntities
 
         public override string ToString()
         {
-            return "("+this.Id+")"+ this.ProductName + "(" +this.Price+ ")";
+            return "("+this.Id+")"+ this.Name + "(" +this.Price+ ")";
         }
     }
 }

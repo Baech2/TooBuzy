@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace TooBuzyClient.GUI.CustomerUI
             InitializeComponent();
         }
 
-        private async void CreateCustomerBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
 
@@ -33,14 +34,12 @@ namespace TooBuzyClient.GUI.CustomerUI
             {
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtType.Text) && !string.IsNullOrEmpty(txtZipCode.Text) && !string.IsNullOrEmpty(txtAddress.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    int parsedPhoneNo;
-                    int parsedZip;
-                    if (int.TryParse(txtPhoneNo.Text, out parsedPhoneNo) && int.TryParse(txtZipCode.Text, out parsedZip))
+                    var hash = PasswordManager.Hash(txtPassword.Text);
+                    if (int.TryParse(txtPhoneNo.Text, out int parsedPhoneNo) && int.TryParse(txtZipCode.Text, out int parsedZip))
                     {
-                        Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text };
-                        await proxy.CreateCustomerAsync(newCustomer);
+                        Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = hash};
+                        proxy.CreateCustomer(newCustomer);
                         MessageBox.Show("Kunden er blevet oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
-
                     }
                 }
             }

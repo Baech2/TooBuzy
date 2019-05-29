@@ -14,6 +14,7 @@ namespace TooBuzyEntities
         {
             Tables = new List<Table>();
             Createdate = DateTime.Now;
+            MenuId = 1;
         }
         [DataMember]
         public int Id { get; set; }
@@ -34,7 +35,7 @@ namespace TooBuzyEntities
         [DataMember]
         public DateTime Createdate { get; set; }
         [DataMember]
-        public int MenuId { get; set; }
+        public int? MenuId { get; set; }
         [DataMember]
         public Menu menu { get; set; }
 

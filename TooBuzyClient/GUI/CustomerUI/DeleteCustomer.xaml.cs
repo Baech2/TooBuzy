@@ -53,7 +53,7 @@ namespace TooBuzyClient.GUI.CustomerUI
             }
         }
 
-        private void DeleteCustomerByIdBtn_Click(object sender, RoutedEventArgs e)
+        private async void DeleteCustomerByIdBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
@@ -63,7 +63,7 @@ namespace TooBuzyClient.GUI.CustomerUI
                     int ParsedId;
                     if (int.TryParse(txtCustomerId.Text, out ParsedId))
                     {
-                        proxy.DeleteConsumer(ParsedId);
+                       await proxy.DeleteCustomerAsync(ParsedId);
 
                         MessageBox.Show("Kunden med følgende id er blevet slettet: " + ParsedId, "Kunde Slettet", MessageBoxButton.OK, MessageBoxImage.Warning);
 
@@ -85,7 +85,7 @@ namespace TooBuzyClient.GUI.CustomerUI
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Visibility = Visibility.Collapsed;
         }
     }
 }

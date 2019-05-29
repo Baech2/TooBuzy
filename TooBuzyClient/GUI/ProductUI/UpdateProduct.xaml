@@ -23,8 +23,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Produkt Id :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2" Margin="10"/>
-        <TextBox Name="txtProductId" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="2" Margin="10" />
+        <TextBlock Text="Produkt Id :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="1" Margin="10"/>
+        <TextBox Name="txtProductId" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="1" Margin="10" />
 
         <TextBlock Text="Produkt navn :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2" Margin="10"/>
         <TextBox Name="txtProductName" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="2" Margin="10" />

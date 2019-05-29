@@ -26,19 +26,19 @@ namespace TooBuzyClient.GUI.ConsumerUI
             InitializeComponent();
         }
 
-        private async void CreateConsumerBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateConsumerBtn_Click(object sender, RoutedEventArgs e)
         {
             TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
             try
             {
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))
                 {
-                    int ParsedPhoneNo = -1;
-                    if (int.TryParse(txtPhoneNo.Text, out ParsedPhoneNo))
+                    var hash = PasswordManager.Hash(txtPassword.Text);
+                    if (int.TryParse(txtPhoneNo.Text, out int ParsedPhoneNo))
                     {
-                        Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = txtPassword.Text };
+                        Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = hash };
 
-                        await proxy.CreateConsumerAsync(newConsumer);
+                        proxy.CreateConsumer(newConsumer);
                         MessageBox.Show("Bruger er blevet oprettet", "Bruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
@@ -49,6 +49,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
             {
 
                 MessageBox.Show("Failed to load server data." + ex.Message);
+                Visibility = Visibility.Collapsed;
             }
             finally
             {

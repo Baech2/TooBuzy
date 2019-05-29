@@ -29,7 +29,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "INSERT INTO [Table] (TableNo, NoOfSeats, BookingId, CustomerId) VALUES (@TableNo, @NoOfSeats, @BookingId, @CustomerId)";
+                        cmd.CommandText = "INSERT INTO [Table] (TableNo, NoOfSeats, CustomerId) VALUES (@TableNo, @NoOfSeats, @CustomerId)";
                         cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
                         cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
                         cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
@@ -124,7 +124,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, BookingId, CustomerId FROM [Table]";
+                        cmd.CommandText = "SELECT Id, TableNo, NoOfSeats, CustomerId FROM [Table]";
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -156,7 +156,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE [Table] SET TableNo = @TableNo, NoOfSeats = @NoOfSeats, BookingId = @BookingId, CustomerId = @CustomerId WHERE Id = @Id";
+                        cmd.CommandText = "UPDATE [Table] SET TableNo = @TableNo, NoOfSeats = @NoOfSeats, CustomerId = @CustomerId WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("TableNo", entity.TableNo);
                         cmd.Parameters.AddWithValue("NoOfSeats", entity.NoOfSeats);
                         cmd.Parameters.AddWithValue("CustomerId", entity.CustomerId);
