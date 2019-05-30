@@ -28,7 +28,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
 
         private void CreateConsumerBtn_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
             try
             {
                 if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtPhoneNo.Text) && !string.IsNullOrEmpty(txtPassword.Text))

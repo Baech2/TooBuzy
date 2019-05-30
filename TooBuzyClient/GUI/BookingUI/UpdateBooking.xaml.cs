@@ -27,7 +27,7 @@ namespace TooBuzyClient.GUI.BookingUI
 
         private void UpdateBookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
             try
             {
                 if (!string.IsNullOrEmpty(txtBookingId.Text) && !string.IsNullOrEmpty(txtConsumerId.Text) && !string.IsNullOrEmpty(txtTableId.Text) && !string.IsNullOrEmpty(MonthlyCalendar.SelectedDate.Value.ToString()))

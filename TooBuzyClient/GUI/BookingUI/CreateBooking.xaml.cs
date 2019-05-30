@@ -32,7 +32,7 @@ namespace TooBuzyClient.GUI.BookingUI
 
         private void CreateBookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
             try
             {
                 if (!string.IsNullOrEmpty(txtConsumerId.Text) && !string.IsNullOrEmpty(txtTableId.Text) && !string.IsNullOrEmpty(SelectedDateTextBox.Text))
@@ -43,7 +43,7 @@ namespace TooBuzyClient.GUI.BookingUI
                         Booking newBooking = new Booking { TableId = ParsedTableId, ConsumerId = ParsedConsumerId, Date = MonthlyCalendar.SelectedDate.Value };
 
                         proxy.CreateBooking(newBooking);
-                        MessageBox.Show("Bruger er blevet oprettet", "Bruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Booking er blevet oprettet", "Booking oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
                 }

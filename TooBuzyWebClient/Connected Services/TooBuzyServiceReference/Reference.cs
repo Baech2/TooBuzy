@@ -391,7 +391,7 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int MenuIdField;
+        private System.Nullable<int> MenuIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -464,7 +464,7 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int MenuId {
+        public System.Nullable<int> MenuId {
             get {
                 return this.MenuIdField;
             }
@@ -596,6 +596,9 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TooBuzyWebClient.TooBuzyServiceReference.Product[] ProductsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -643,6 +646,19 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -698,13 +714,13 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         private int MenuIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] OrderlinesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal PriceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ProductNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StockField;
@@ -798,6 +814,19 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public TooBuzyWebClient.TooBuzyServiceReference.OrderLine[] Orderlines {
             get {
                 return this.OrderlinesField;
@@ -819,19 +848,6 @@ namespace TooBuzyWebClient.TooBuzyServiceReference {
                 if ((this.PriceField.Equals(value) != true)) {
                     this.PriceField = value;
                     this.RaisePropertyChanged("Price");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProductName {
-            get {
-                return this.ProductNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProductNameField, value) != true)) {
-                    this.ProductNameField = value;
-                    this.RaisePropertyChanged("ProductName");
                 }
             }
         }

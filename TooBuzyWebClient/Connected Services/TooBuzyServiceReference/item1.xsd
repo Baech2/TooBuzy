@@ -43,7 +43,7 @@
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Createdate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="MenuId" type="xs:int" />
+      <xs:element minOccurs="0" name="MenuId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNo" type="xs:int" />
@@ -65,6 +65,7 @@
       <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Products" nillable="true" type="tns:ArrayOfProduct" />
     </xs:sequence>
   </xs:complexType>
@@ -83,9 +84,9 @@
       <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
       <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
       <xs:element minOccurs="0" name="MenuId" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Orderlines" nillable="true" type="tns:ArrayOfOrderLine" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Stock" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

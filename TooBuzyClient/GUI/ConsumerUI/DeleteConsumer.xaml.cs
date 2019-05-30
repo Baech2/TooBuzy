@@ -32,7 +32,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
 
         private async void GetConsumerByIdBtn_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
             try
             {
                 if (!string.IsNullOrEmpty(txtConsumerId.Text))
@@ -60,7 +60,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
 
         private async void DeleteConsumerByIdBtn_Click(object sender, RoutedEventArgs e)
         {
-            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("NetTcpBinding_ITooBuzyService");
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
             try
             {
                 if (!string.IsNullOrEmpty(txtConsumerId.Text))
@@ -70,7 +70,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
                     {
                         await proxy.DeleteConsumerAsync(ParsedId);
 
-                        MessageBox.Show("Brugeren med følgende id er blevet slettet: " + ParsedId, "Bruger Slettet", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Forbruger med følgende id er blevet slettet: " + ParsedId, "Forbruger Slettet", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                     }
 

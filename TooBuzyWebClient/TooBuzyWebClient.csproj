@@ -226,10 +226,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\TooBuzyServiceReference\TooBuzyService.wsdl" />
-    <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyWebClient.TooBuzyServiceReference.Consumer.datasource">
+    <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyWebClient.TooBuzyServiceReference.Booking.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyWebClient.TooBuzyServiceReference.Booking.datasource">
+    <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyWebClient.TooBuzyServiceReference.Consumer.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\TooBuzyServiceReference\TooBuzyWebClient.TooBuzyServiceReference.Customer.datasource">
