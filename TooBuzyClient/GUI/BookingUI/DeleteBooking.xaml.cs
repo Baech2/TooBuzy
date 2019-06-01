@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TooBuzyEntities;
 
 namespace TooBuzyClient.GUI.BookingUI
 {
@@ -26,12 +27,60 @@ namespace TooBuzyClient.GUI.BookingUI
 
         private void GetBookingByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtBookingId.Text))
+                {
+                    int ParsedId;
+                    if (int.TryParse(txtBookingId.Text, out ParsedId))
+                    {
+                        Booking booking = proxy.GetBookingById(ParsedId);
 
+                        MessageBox.Show(booking.Date.ToString()+" " +booking.ConsumerId);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
 
         private void DeleteBookingByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtBookingId.Text))
+                {
+                    int ParsedId;
+                    if (int.TryParse(txtBookingId.Text, out ParsedId))
+                    {
+                        proxy.DeleteCustomer(ParsedId);
 
+                        MessageBox.Show("Booking med følgende id er blevet slettet: " + ParsedId, "Booking Slettet", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+                Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)

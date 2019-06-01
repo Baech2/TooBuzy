@@ -39,7 +39,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
                         Consumer newConsumer = new Consumer { Name = txtName.Text, PhoneNo = ParsedPhoneNo, Password = hash };
 
                         proxy.CreateConsumer(newConsumer);
-                        MessageBox.Show("Bruger er blevet oprettet", "Bruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Forbruger er blevet oprettet", "Forbruger oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
                 }

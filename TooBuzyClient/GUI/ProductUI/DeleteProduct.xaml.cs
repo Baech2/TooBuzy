@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TooBuzyEntities;
 
 namespace TooBuzyClient.GUI.ProductUI
 {
@@ -26,17 +27,65 @@ namespace TooBuzyClient.GUI.ProductUI
 
         private void GetProductByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtProductId.Text))
+                {
 
+                    if (int.TryParse(txtProductId.Text, out int ParsedId))
+                    {
+                        Product product = proxy.GetProductById(ParsedId);
+
+                        MessageBox.Show(product.Name);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+            }
         }
 
         private void DeleteProductByIdBtn_Click(object sender, RoutedEventArgs e)
         {
+            TooBuzyServiceReference.TooBuzyServiceClient proxy = new TooBuzyServiceReference.TooBuzyServiceClient("TooBuzyServies");
+            try
+            {
+                if (!string.IsNullOrEmpty(txtProductId.Text))
+                {
 
+                    if (int.TryParse(txtProductId.Text, out int ParsedId))
+                    {
+                        proxy.DeleteProduct(ParsedId);
+
+                        MessageBox.Show("Produkt med følgende id er blevet slettet: " + ParsedId, "Produkt Slettet", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Failed to load server data." + ex.Message);
+            }
+            finally
+            {
+                proxy.Close();
+                Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AnnullerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Visibility = Visibility.Collapsed;
         }
     }
 }

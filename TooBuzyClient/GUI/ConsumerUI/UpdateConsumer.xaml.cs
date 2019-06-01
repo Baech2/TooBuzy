@@ -38,7 +38,7 @@ namespace TooBuzyClient.GUI.ConsumerUI
                     {
                         Consumer UpdateConsumer = new Consumer {Name = txtName.Text, PhoneNo = PhoneNoUpdate, Password = txtPassword.Text };
                         client.UpdateConsumer(UpdateConsumer);
-                        MessageBox.Show("Bruger er blevet opdateret", "Bruger opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Forbruger er blevet opdateret", "Forbruger opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }

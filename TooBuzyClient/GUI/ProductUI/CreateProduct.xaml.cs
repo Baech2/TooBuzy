@@ -38,7 +38,7 @@ namespace TooBuzyClient.GUI.ProductUI
                         Product newProduct = new Product { Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, ImageUrl = txtImageUrl.Text, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
 
                         proxy.CreateProduct(newProduct);
-                        MessageBox.Show("Productet er blevet oprettet", "Product oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Produktet er blevet oprettet", "Produkt oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }

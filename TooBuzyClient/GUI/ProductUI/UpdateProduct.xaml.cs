@@ -43,7 +43,7 @@ namespace TooBuzyClient.GUI.ProductUI
                         Product updateProduct = new Product { Id = parsedProductId, Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, ImageUrl = txtImageUrl.Text, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
 
                         proxy.UpdateProduct(updateProduct);
-                        MessageBox.Show("Productet er blevet opdateret", "Product opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Produktet er blevet opdateret", "Produkt opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
