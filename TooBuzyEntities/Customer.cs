@@ -29,6 +29,8 @@ namespace TooBuzyEntities
         [DataMember]
         public int PhoneNo { get; set; }
         [DataMember]
+        public string Logo { get; set; }
+        [DataMember]
         public string Password { get; set; }
         [DataMember]
         public List<Table> Tables { get; set; }

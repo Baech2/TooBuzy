@@ -55,18 +55,6 @@ namespace TooBuzyDataAccess
                                 Ccmd.Parameters.AddWithValue("Password", entity.Password);
                                 insertedId = (int)Ccmd.ExecuteScalar();
                             }
-                            foreach (Booking bk in entity.Bookings)
-                            {
-                                using (SqlCommand bkcmd = connection.CreateCommand())
-                                {
-                                    bkcmd.CommandText = "SELECET Id, Date, ConsumerId, TableId FROM Consumer WHERE ConsumerId = @ConsumerId";
-                                    bkcmd.Parameters.AddWithValue("Id", bk.Id);
-                                    bkcmd.Parameters.AddWithValue("Date", bk.Date);
-                                    bkcmd.Parameters.AddWithValue("ConsumerId", insertedId);
-                                    bkcmd.Parameters.AddWithValue("TableId", bk.TableId);
-                                    bkcmd.ExecuteNonQuery();
-                                }
-                            }
                             Console.WriteLine("Consumer created");
                             Console.WriteLine("----------------");
                             connection.Close();

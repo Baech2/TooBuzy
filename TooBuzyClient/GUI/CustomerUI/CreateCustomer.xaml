@@ -16,6 +16,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -37,11 +38,14 @@
         <TextBlock Text="Telefon nummer :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="5" Margin="10"/>
         <TextBox Name="txtPhoneNo" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="5" Margin="10" />
 
-        <TextBlock Text="Password :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Margin="10"/>
-        <TextBox Name="txtPassword" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="6" Margin="10" />
+        <TextBlock Text="Logo :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Margin="10"/>
+        <TextBox Name="txtLogo" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="6" Margin="10" />
 
-        <Button Content="Opret" Grid.Row="7" Margin="10" Padding="5" HorizontalAlignment="Right" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
-        <Button Content="Annuller" Grid.Row="7" Margin="10" HorizontalAlignment="Left" Grid.Column="1" Name="AnnullerBtn" Click="AnnullerBtn_Click"/>
+        <TextBlock Text="Password :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="7" Margin="10"/>
+        <TextBox Name="txtPassword" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="7" Margin="10" />
+
+        <Button Content="Opret" Grid.Row="8" Margin="10" Padding="5" HorizontalAlignment="Right" Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click"/>
+        <Button Content="Annuller" Grid.Row="8" Margin="10" HorizontalAlignment="Left" Grid.Column="1" Name="AnnullerBtn" Click="AnnullerBtn_Click"/>
 
     </Grid>
 </Window>

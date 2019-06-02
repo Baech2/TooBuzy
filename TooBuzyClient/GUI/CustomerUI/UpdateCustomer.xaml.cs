@@ -35,7 +35,8 @@ namespace TooBuzyClient.GUI.CustomerUI
                 {
                     if (int.TryParse(txtPhoneNo.Text, out int parsedPhoneNo) && int.TryParse(txtZipCode.Text,out int parsedZip) && int.TryParse(txtMenuId.Text, out int parsedMenuId))
                     {
-                        Customer updateCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = txtPassword.Text, MenuId = parsedMenuId };
+                        var hash = PasswordManager.Hash(txtPassword.Text);
+                        Customer updateCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Logo = txtLogo.Text, Password = hash, MenuId = parsedMenuId };
                         proxy.UpdateCustomer(updateCustomer);
                         MessageBox.Show("Kunden er blevet opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
 

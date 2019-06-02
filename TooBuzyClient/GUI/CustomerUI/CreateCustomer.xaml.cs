@@ -37,7 +37,7 @@ namespace TooBuzyClient.GUI.CustomerUI
                     var hash = PasswordManager.Hash(txtPassword.Text);
                     if (int.TryParse(txtPhoneNo.Text, out int parsedPhoneNo) && int.TryParse(txtZipCode.Text, out int parsedZip))
                     {
-                        Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Password = hash};
+                        Customer newCustomer = new Customer { Name = txtName.Text, Type = txtType.Text, ZipCode = parsedZip, Address = txtAddress.Text, PhoneNo = parsedPhoneNo, Logo = txtLogo.Text , Password = hash};
                         proxy.CreateCustomer(newCustomer);
                         MessageBox.Show("Kunden er blevet oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
                     }

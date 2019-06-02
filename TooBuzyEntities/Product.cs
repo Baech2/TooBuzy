@@ -24,8 +24,6 @@ namespace TooBuzyEntities
         [DataMember]
         public decimal Price { get; set; }
         [DataMember]
-        public string ImageUrl { get; set; }
-        [DataMember]
         public bool IsDeleted { get; set; }
         [DataMember]
         public int Stock { get; set; }

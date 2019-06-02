@@ -35,9 +35,6 @@
         <TextBlock Text="Pris :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="4" Margin="10"/>
         <TextBox Name="txtPrice" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="4" Margin="10" />
 
-        <TextBlock Text="Billede navn :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="5" Margin="10"/>
-        <TextBox Name="txtImageUrl" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="5" Margin="10" />
-
         <TextBlock Text="Antal i beholding :" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="6" Margin="10"/>
         <TextBox Name="txtStock" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Grid.Column="1" Grid.Row="6" Margin="10" />
 

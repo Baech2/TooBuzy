@@ -40,7 +40,7 @@ namespace TooBuzyClient.GUI.ProductUI
                 {
                     if (decimal.TryParse(txtPrice.Text, out decimal parsedPrice) && int.TryParse(txtStock.Text, out int parsedStock) && int.TryParse(txtMenuId.Text, out int parsedMenuId) && int.TryParse(txtProductId.Text, out int parsedProductId))
                     {
-                        Product updateProduct = new Product { Id = parsedProductId, Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, ImageUrl = txtImageUrl.Text, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
+                        Product updateProduct = new Product { Id = parsedProductId, Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
 
                         proxy.UpdateProduct(updateProduct);
                         MessageBox.Show("Produktet er blevet opdateret", "Produkt opdateret", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -15,8 +15,6 @@ namespace TooBuzyEntities
         [DataMember]
         public int Quantity { get; set; }
         [DataMember]
-        public decimal SubTotal { get; set; }
-        [DataMember]
         public int OrderId { get; set; }
         [DataMember]
         public Order Order { get; set; }

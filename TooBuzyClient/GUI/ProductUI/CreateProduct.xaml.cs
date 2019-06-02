@@ -35,7 +35,7 @@ namespace TooBuzyClient.GUI.ProductUI
                 {
                     if (decimal.TryParse(txtPrice.Text, out decimal parsedPrice) && int.TryParse(txtStock.Text, out int parsedStock) && int.TryParse(txtMenuId.Text, out int parsedMenuId))
                     {
-                        Product newProduct = new Product { Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, ImageUrl = txtImageUrl.Text, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
+                        Product newProduct = new Product { Name = txtProductName.Text, Description = txtDescription.Text, Price = parsedPrice, Stock = parsedStock, MenuId = parsedMenuId, IsDeleted = false };
 
                         proxy.CreateProduct(newProduct);
                         MessageBox.Show("Produktet er blevet oprettet", "Produkt oprettet", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -29,7 +29,7 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT Name FROM Consumer WHERE Name = @Name";
+                        cmd.CommandText = "SELECT Name FROM Customer WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         System.Data.DataSet ds = new System.Data.DataSet();
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -46,12 +46,13 @@ namespace TooBuzyDataAccess
                         {
                             using (SqlCommand Ccmd = connection.CreateCommand())
                             {
-                                Ccmd.CommandText = "INSERT INTO Customer (Name, Type, ZipCode, Address, PhoneNo, Createdate, Password, MenuId) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Createdate, @Password, @MenuId)";
+                                Ccmd.CommandText = "INSERT INTO Customer (Name, Type, ZipCode, Address, PhoneNo, Logo, Createdate, Password, MenuId) VALUES(@Name, @Type, @ZipCode, @Address, @PhoneNo, @Logo, @Createdate, @Password, @MenuId)";
                                 Ccmd.Parameters.AddWithValue("Name", entity.Name);
                                 Ccmd.Parameters.AddWithValue("Type", entity.Type);
                                 Ccmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
                                 Ccmd.Parameters.AddWithValue("Address", entity.Address);
                                 Ccmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                                Ccmd.Parameters.AddWithValue("Logo", entity.Logo);
                                 Ccmd.Parameters.AddWithValue("Createdate", entity.Createdate);
                                 Ccmd.Parameters.AddWithValue("Password", entity.Password);
                                 Ccmd.Parameters.AddWithValue("MenuId", entity.MenuId);
@@ -124,6 +125,7 @@ namespace TooBuzyDataAccess
                             cus.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
                             cus.Address = reader.GetString(reader.GetOrdinal("Address"));
                             cus.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            cus.Logo = reader.GetString(reader.GetOrdinal("Logo"));
                             cus.Createdate = reader.GetDateTime(reader.GetOrdinal("Createdate"));
                             cus.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
                             customers.Add(cus);
@@ -164,6 +166,7 @@ namespace TooBuzyDataAccess
                             customer.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
                             customer.Address = reader.GetString(reader.GetOrdinal("Address"));
                             customer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            customer.Logo = reader.GetString(reader.GetOrdinal("Logo"));
                             customer.Createdate = reader.GetDateTime(reader.GetOrdinal("Createdate"));
                             customer.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
 
@@ -221,6 +224,9 @@ namespace TooBuzyDataAccess
                             customer.ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode"));
                             customer.Address = reader.GetString(reader.GetOrdinal("Address"));
                             customer.PhoneNo = reader.GetInt32(reader.GetOrdinal("PhoneNo"));
+                            customer.Logo = reader.GetString(reader.GetOrdinal("Logo"));
+                            customer.MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"));
+
                         }
                     }
                     connection.Close();
@@ -294,13 +300,14 @@ namespace TooBuzyDataAccess
 
                     using (SqlCommand cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = "UPDATE Customer SET Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Password = @Password, MenuId = @MenuId WHERE Name = @Name";
+                        cmd.CommandText = "UPDATE Customer SET Type = @Type, ZipCode = @ZipCode, Address = @Address, PhoneNo = @PhoneNo, Logo = @Logo Password = @Password, MenuId = @MenuId WHERE Name = @Name";
                         cmd.Parameters.AddWithValue("Id", entity.Id);
                         cmd.Parameters.AddWithValue("Name", entity.Name);
                         cmd.Parameters.AddWithValue("Type", entity.Type);
                         cmd.Parameters.AddWithValue("ZipCode", entity.ZipCode);
                         cmd.Parameters.AddWithValue("Address", entity.Address);
                         cmd.Parameters.AddWithValue("PhoneNo", entity.PhoneNo);
+                        cmd.Parameters.AddWithValue("Logo", entity.Logo);
                         cmd.Parameters.AddWithValue("Password", entity.Password);
                         cmd.Parameters.AddWithValue("MenuId", entity.MenuId);
                         cmd.ExecuteNonQuery();

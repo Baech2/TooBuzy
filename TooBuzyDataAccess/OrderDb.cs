@@ -43,7 +43,7 @@ namespace TooBuzyDataAccess
                         {
                             cmd.CommandText = "SELECT Stock FROM Product WHERE Id = @Id";
                             cmd.Parameters.AddWithValue("Id", ol.ProductId);
-                            var quantityInStock = (int)cmd.ExecuteScalar();
+                            int quantityInStock = (int)cmd.ExecuteScalar();
                             if (quantityInStock < ol.Quantity)
                             {
                                 throw new Exception("Not enough products in stock");
@@ -52,9 +52,8 @@ namespace TooBuzyDataAccess
                             {
                                 using (SqlCommand olCmd = connection.CreateCommand())
                                 {
-                                    olCmd.CommandText = "INSERT INTO Orderline (Quantity, SubTotal, OrderId, ProductId) VALUES (@Quantity, @SubTotal, @OrderId, @ProductId)";
+                                    olCmd.CommandText = "INSERT INTO Orderline (Quantity, OrderId, ProductId) VALUES (@Quantity, @OrderId, @ProductId)";
                                     olCmd.Parameters.AddWithValue("Quantity", ol.Quantity);
-                                    olCmd.Parameters.AddWithValue("SubTotal", ol.SubTotal);
                                     olCmd.Parameters.AddWithValue("OrderId", insertedId);
                                     olCmd.Parameters.AddWithValue("ProductId", ol.ProductId);
                                     olCmd.ExecuteNonQuery();
@@ -168,7 +167,7 @@ namespace TooBuzyDataAccess
                     }
                     using (SqlCommand olCmd = connection.CreateCommand())
                     {
-                        olCmd.CommandText = "SELECT Id, Quantity, SubTotal, OrderId, ProductId FROM OrderLine WHERE OrderId = @OrderId";
+                        olCmd.CommandText = "SELECT Id, Quantity, OrderId, ProductId FROM OrderLine WHERE OrderId = @OrderId";
                         olCmd.Parameters.AddWithValue("OrderId", Id);
                         SqlDataReader reader = olCmd.ExecuteReader();
                         while (reader.Read())
@@ -178,7 +177,6 @@ namespace TooBuzyDataAccess
                                 { 
                                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                     Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                                    SubTotal = reader.GetDecimal(reader.GetOrdinal("SubTotal")),
                                     ProductId = reader.GetInt32(reader.GetOrdinal("ProductId"))
                                 });
                         }

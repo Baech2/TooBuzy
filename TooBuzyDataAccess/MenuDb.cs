@@ -138,7 +138,7 @@ namespace TooBuzyDataAccess
                     }
                     using (SqlCommand Mcmd = connection.CreateCommand())
                     {
-                        Mcmd.CommandText = "SELECT Id, Name, Description, Price, ImageUrl, IsDeleted, MenuId FROM Product WHERE MenuId = @MenuId ";
+                        Mcmd.CommandText = "SELECT Id, Name, Description, Price, IsDeleted, MenuId FROM Product WHERE MenuId = @MenuId ";
                         Mcmd.Parameters.AddWithValue("MenuId", Id);
                         SqlDataReader reader = Mcmd.ExecuteReader();
                         while (reader.Read())
@@ -149,7 +149,6 @@ namespace TooBuzyDataAccess
                                 Name = reader.GetString(reader.GetOrdinal("Name")),
                                 Description = reader.GetString(reader.GetOrdinal("Description")),
                                 Price = reader.GetDecimal(reader.GetOrdinal("Price")),
-                                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
                                 IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted")),
                                 MenuId = reader.GetInt32(reader.GetOrdinal("MenuId"))
                             });
